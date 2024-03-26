@@ -1,0 +1,12 @@
+version: "3.9"
+name: mobilerecommendation
+services:
+   db:
+      image: postgres:latest
+      restart: always
+      ports:
+         - 5432:5432
+      environment:
+         POSTGRES_DATABASE: mobiledb
+         POSTGRES_PASSWORD: root
+         POSTGRES_USERNAME: postgres

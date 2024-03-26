@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum role {
+  admin
+  professor
+  student
+}
+
+enum EnrollStatus {
+  Enrolled
+  Drop
+}
+
+model User {
+  userID    String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  role      role
+  createdAt DateTime @default(now()) @db.Timestamp()
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp()
+  Profile   Profile?
+  Enroll    Enroll[]
+}
+
+model Profile {
+  profileID String   @id @default(cuid())
+  fullname  String
+  birthday  DateTime @db.Date
+  phone     String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp()
+  User      User?    @relation(fields: [userID], references: [userID])
+  userID    String?  @unique
+}
+
+model Enroll {
+  enrollID  String       @id @default(cuid())
+  status    EnrollStatus @default(Enrolled)
+  createdAt DateTime     @default(now()) @db.Timestamp()
+  updatedAt DateTime     @default(now()) @updatedAt @db.Timestamp()
+  Subject   Subject[]
+  User      User?        @relation(fields: [userID], references: [userID])
+  userID    String?
+}
+
+model Subject {
+  subjectID String   @id @default(cuid())
+  subject   String
+  tags      String
+  createdAt DateTime @default(now()) @db.Timestamp()
+  updatedAt DateTime @default(now()) @db.Timestamp()
+  Lesson    Lesson[]
+  Enroll    Enroll?  @relation(fields: [enrollID], references: [enrollID])
+  enrollID  String?
+}
+
+model Lesson {
+  lessonID   String       @id @default(cuid())
+  lesson     String
+  createdAt  DateTime     @default(now()) @db.Timestamp()
+  updatedAt  DateTime     @default(now()) @updatedAt @db.Timestamp()
+  Assessment Assessment[]
+  Subject    Subject?     @relation(fields: [subjectID], references: [subjectID])
+  subjectID  String?
+}
+
+model Assessment {
+  assessmentID String   @id @default(cuid())
+  assessment   String
+  createdAt    DateTime @default(now()) @db.Timestamp()
+  updatedAt    DateTime @default(now()) @updatedAt @db.Timestamp()
+  Lesson       Lesson?  @relation(fields: [lessonID], references: [lessonID])
+  lessonID     String?
+}
