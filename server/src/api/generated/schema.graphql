@@ -21,6 +21,7 @@ type Mutation {
   login(password: String!, username: String!): user
   updateSubject(subject: String!, subjectID: ID!): subject
   updateSubjectLesson(lesson: String!, lessonID: ID!): lesson
+  updateUserProfile(input: profileInput): profile
 }
 
 """
@@ -34,6 +35,13 @@ type Query {
   getAllUserByRole(role: userRoles, skip: Int!, take: Int!): [user]
   getUserById(userID: ID!): [user]
   getUserProfileById(userID: ID!): profile
+}
+
+type enroll {
+  createdAt: DateTime
+  enrollID: ID
+  status: String
+  updatedAt: DateTime
 }
 
 type lesson {
@@ -52,6 +60,13 @@ type profile {
   user: user
 }
 
+input profileInput {
+  birthday: Date
+  fullname: String
+  phone: PhoneNumber
+  profileID: ID
+}
+
 type subject {
   createdAt: DateTime
   lessons: [lesson]
@@ -65,6 +80,7 @@ type user {
   createdAt: DateTime
   email: String
   password: String
+  profile: profile
   role: String
   updatedAt: DateTime
   userID: ID

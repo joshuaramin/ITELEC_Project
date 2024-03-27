@@ -56,7 +56,7 @@ export const UserMutation = extendType({
         t.field("login", {
             type: "user",
             args: { username: nonNull(stringArg()), password: nonNull(stringArg()) },
-            resolve: async (_, { username, password }, { res }): Promise<Token> => {
+            resolve: async (_, { username, password }, { res }): Promise<any> => {
 
 
                 const users = await prisma.user.findUnique({

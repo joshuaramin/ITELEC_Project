@@ -44,6 +44,12 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  profileInput: { // input type
+    birthday?: NexusGenScalars['Date'] | null; // Date
+    fullname?: string | null; // String
+    phone?: NexusGenScalars['PhoneNumber'] | null; // PhoneNumber
+    profileID?: string | null; // ID
+  }
   userInput: { // input type
     birthday?: NexusGenScalars['Date'] | null; // Date
     email?: string | null; // String
@@ -72,6 +78,12 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Mutation: {};
   Query: {};
+  enroll: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    enrollID?: string | null; // ID
+    status?: string | null; // String
+    updatedAt?: NexusGenScalars['DateTime'] | null; // DateTime
+  }
   lesson: { // root type
     lesson?: string | null; // String
     lessonID?: string | null; // ID
@@ -123,6 +135,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['user'] | null; // user
     updateSubject: NexusGenRootTypes['subject'] | null; // subject
     updateSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
+    updateUserProfile: NexusGenRootTypes['profile'] | null; // profile
   }
   Query: { // field return type
     getAllLesson: Array<NexusGenRootTypes['lesson'] | null> | null; // [lesson]
@@ -130,6 +143,12 @@ export interface NexusGenFieldTypes {
     getAllUserByRole: Array<NexusGenRootTypes['user'] | null> | null; // [user]
     getUserById: Array<NexusGenRootTypes['user'] | null> | null; // [user]
     getUserProfileById: NexusGenRootTypes['profile'] | null; // profile
+  }
+  enroll: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    enrollID: string | null; // ID
+    status: string | null; // String
+    updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
   }
   lesson: { // field return type
     lesson: string | null; // String
@@ -157,6 +176,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     email: string | null; // String
     password: string | null; // String
+    profile: NexusGenRootTypes['profile'] | null; // profile
     role: string | null; // String
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
     userID: string | null; // ID
@@ -174,6 +194,7 @@ export interface NexusGenFieldTypeNames {
     login: 'user'
     updateSubject: 'subject'
     updateSubjectLesson: 'lesson'
+    updateUserProfile: 'profile'
   }
   Query: { // field return type name
     getAllLesson: 'lesson'
@@ -181,6 +202,12 @@ export interface NexusGenFieldTypeNames {
     getAllUserByRole: 'user'
     getUserById: 'user'
     getUserProfileById: 'profile'
+  }
+  enroll: { // field return type name
+    createdAt: 'DateTime'
+    enrollID: 'ID'
+    status: 'String'
+    updatedAt: 'DateTime'
   }
   lesson: { // field return type name
     lesson: 'String'
@@ -208,6 +235,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     email: 'String'
     password: 'String'
+    profile: 'profile'
     role: 'String'
     updatedAt: 'DateTime'
     userID: 'ID'
@@ -246,6 +274,9 @@ export interface NexusGenArgTypes {
     updateSubjectLesson: { // args
       lesson: string; // String!
       lessonID: string; // ID!
+    }
+    updateUserProfile: { // args
+      input?: NexusGenInputs['profileInput'] | null; // profileInput
     }
   }
   Query: {

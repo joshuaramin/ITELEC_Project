@@ -1,4 +1,5 @@
 import { objectType } from "nexus";
+import { prisma } from "../../helpers/services";
 
 
 
@@ -12,5 +13,15 @@ export const UserObject = objectType({
         t.string("role");
         t.datetime("createdAt");
         t.datetime("updatedAt");
+        t.field("profile", {
+            type: "profile",
+            resolve: async ({ userID }): Promise<any> => {
+                return await prisma.profile.findFirst({
+                    where: {
+                        userID
+                    }
+                })
+            }
+        })
     },
 })
