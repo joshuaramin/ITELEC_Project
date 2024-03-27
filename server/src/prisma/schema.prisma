@@ -52,9 +52,11 @@ model Enroll {
   status    EnrollStatus @default(Enrolled)
   createdAt DateTime     @default(now()) @db.Timestamp()
   updatedAt DateTime     @default(now()) @updatedAt @db.Timestamp()
-  Subject   Subject[]
-  User      User?        @relation(fields: [userID], references: [userID])
+
+  User      User?    @relation(fields: [userID], references: [userID])
   userID    String?
+  Subject   Subject? @relation(fields: [subjectID], references: [subjectID])
+  subjectID String?
 }
 
 model Subject {
@@ -64,8 +66,7 @@ model Subject {
   createdAt DateTime @default(now()) @db.Timestamp()
   updatedAt DateTime @default(now()) @db.Timestamp()
   Lesson    Lesson[]
-  Enroll    Enroll?  @relation(fields: [enrollID], references: [enrollID])
-  enrollID  String?
+  Enroll    Enroll[]
 }
 
 model Lesson {

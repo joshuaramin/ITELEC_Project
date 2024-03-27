@@ -27,6 +27,15 @@ export const SubjectMutation = extendType({
                 })
             }
         })
+        t.field("updatSubjectTags", {
+            type: "subject",
+            args: { tags: nonNull(stringArg()), subjectID: nonNull(idArg()) },
+            resolve: async (_, { tags, subjectID }): Promise<any> => {
+                return await prisma.subject.update({
+                    data: { tags }, where: { subjectID }
+                })
+            }
+        })
         t.field("deleteSubject", {
             type: "subject",
             args: { subjectID: nonNull(idArg()) },

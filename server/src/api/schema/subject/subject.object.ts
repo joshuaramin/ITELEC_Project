@@ -21,5 +21,15 @@ export const SubjectObject = objectType({
                 })
             }
         })
+        t.list.field("enrolled", {
+            type: "enroll",
+            resolve: async ({ subjectID }): Promise<any> => {
+                return await prisma.enroll.findMany({
+                    where: {
+                        subjectID
+                    }
+                })
+            }
+        })
     },
 })

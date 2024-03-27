@@ -37,6 +37,7 @@ CREATE TABLE "Enroll" (
     "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userID" TEXT,
+    "subjectID" TEXT,
 
     CONSTRAINT "Enroll_pkey" PRIMARY KEY ("enrollID")
 );
@@ -48,7 +49,6 @@ CREATE TABLE "Subject" (
     "tags" TEXT NOT NULL,
     "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "enrollID" TEXT,
 
     CONSTRAINT "Subject_pkey" PRIMARY KEY ("subjectID")
 );
@@ -91,7 +91,7 @@ ALTER TABLE "Profile" ADD CONSTRAINT "Profile_userID_fkey" FOREIGN KEY ("userID"
 ALTER TABLE "Enroll" ADD CONSTRAINT "Enroll_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User"("userID") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Subject" ADD CONSTRAINT "Subject_enrollID_fkey" FOREIGN KEY ("enrollID") REFERENCES "Enroll"("enrollID") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Enroll" ADD CONSTRAINT "Enroll_subjectID_fkey" FOREIGN KEY ("subjectID") REFERENCES "Subject"("subjectID") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_subjectID_fkey" FOREIGN KEY ("subjectID") REFERENCES "Subject"("subjectID") ON DELETE SET NULL ON UPDATE CASCADE;
