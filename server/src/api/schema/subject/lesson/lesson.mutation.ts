@@ -34,5 +34,16 @@ export const LessonMutation = extendType({
                 })
             }
         })
+        t.field("deleteSubjectLesson", {
+            type: "lesson",
+            args: { lessonID: nonNull(idArg()) },
+            resolve: async (_, { lessonID }): Promise<any> => {
+                return await prisma.lesson.delete({
+                    where: {
+                        lessonID
+                    }
+                })
+            }
+        })
     },
 })
