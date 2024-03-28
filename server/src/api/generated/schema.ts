@@ -128,19 +128,27 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createSubject: NexusGenRootTypes['subject'] | null; // subject
+    createSubjectEnroll: NexusGenRootTypes['enroll'] | null; // enroll
     createSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
     createUserAccount: NexusGenRootTypes['user'] | null; // user
     deleteSubject: NexusGenRootTypes['subject'] | null; // subject
+    deleteSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
     deleteUserAccount: NexusGenRootTypes['user'] | null; // user
     login: NexusGenRootTypes['user'] | null; // user
+    updatSubjectTags: NexusGenRootTypes['subject'] | null; // subject
     updateSubject: NexusGenRootTypes['subject'] | null; // subject
     updateSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
     updateUserProfile: NexusGenRootTypes['profile'] | null; // profile
   }
   Query: { // field return type
     getAllLesson: Array<NexusGenRootTypes['lesson'] | null> | null; // [lesson]
+    getAllSubject: Array<NexusGenRootTypes['subject'] | null> | null; // [subject]
     getAllSubjectList: Array<NexusGenRootTypes['subject'] | null> | null; // [subject]
     getAllUserByRole: Array<NexusGenRootTypes['user'] | null> | null; // [user]
+    getEnrollendById: NexusGenRootTypes['enroll'] | null; // enroll
+    getSubejectById: NexusGenRootTypes['subject'] | null; // subject
+    getSubjectBySearch: Array<NexusGenRootTypes['subject'] | null> | null; // [subject]
+    getSubjectTags: NexusGenRootTypes['subject'] | null; // subject
     getUserById: Array<NexusGenRootTypes['user'] | null> | null; // [user]
     getUserProfileById: NexusGenRootTypes['profile'] | null; // profile
   }
@@ -166,6 +174,7 @@ export interface NexusGenFieldTypes {
   }
   subject: { // field return type
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
+    enrolled: Array<NexusGenRootTypes['enroll'] | null> | null; // [enroll]
     lessons: Array<NexusGenRootTypes['lesson'] | null> | null; // [lesson]
     subject: string | null; // String
     subjectID: string | null; // ID
@@ -187,19 +196,27 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createSubject: 'subject'
+    createSubjectEnroll: 'enroll'
     createSubjectLesson: 'lesson'
     createUserAccount: 'user'
     deleteSubject: 'subject'
+    deleteSubjectLesson: 'lesson'
     deleteUserAccount: 'user'
     login: 'user'
+    updatSubjectTags: 'subject'
     updateSubject: 'subject'
     updateSubjectLesson: 'lesson'
     updateUserProfile: 'profile'
   }
   Query: { // field return type name
     getAllLesson: 'lesson'
+    getAllSubject: 'subject'
     getAllSubjectList: 'subject'
     getAllUserByRole: 'user'
+    getEnrollendById: 'enroll'
+    getSubejectById: 'subject'
+    getSubjectBySearch: 'subject'
+    getSubjectTags: 'subject'
     getUserById: 'user'
     getUserProfileById: 'profile'
   }
@@ -225,6 +242,7 @@ export interface NexusGenFieldTypeNames {
   }
   subject: { // field return type name
     createdAt: 'DateTime'
+    enrolled: 'enroll'
     lessons: 'lesson'
     subject: 'String'
     subjectID: 'ID'
@@ -248,6 +266,11 @@ export interface NexusGenArgTypes {
     createSubject: { // args
       subject: string; // String!
       tags: string; // String!
+      userID: string; // ID!
+    }
+    createSubjectEnroll: { // args
+      subjectID: string; // ID!
+      userID: string; // ID!
     }
     createSubjectLesson: { // args
       lesson: string; // String!
@@ -260,12 +283,19 @@ export interface NexusGenArgTypes {
     deleteSubject: { // args
       subjectID: string; // ID!
     }
+    deleteSubjectLesson: { // args
+      lessonID: string; // ID!
+    }
     deleteUserAccount: { // args
       userID: string; // ID!
     }
     login: { // args
       password: string; // String!
       username: string; // String!
+    }
+    updatSubjectTags: { // args
+      subjectID: string; // ID!
+      tags: string; // String!
     }
     updateSubject: { // args
       subject: string; // String!
@@ -280,10 +310,26 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getAllSubject: { // args
+      skip: number; // Int!
+      take: number; // Int!
+    }
     getAllUserByRole: { // args
       role?: NexusGenEnums['userRoles'] | null; // userRoles
       skip: number; // Int!
       take: number; // Int!
+    }
+    getEnrollendById: { // args
+      enrollID: string; // ID!
+    }
+    getSubejectById: { // args
+      subjectID: string; // ID!
+    }
+    getSubjectBySearch: { // args
+      search: string; // String!
+    }
+    getSubjectTags: { // args
+      tags: string; // String!
     }
     getUserById: { // args
       userID: string; // ID!

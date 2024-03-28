@@ -25,14 +25,15 @@ enum EnrollStatus {
 }
 
 model User {
-  userID    String   @id @default(cuid())
-  username  String   @unique
-  email     String   @unique
+  userID    String    @id @default(cuid())
+  username  String    @unique
+  email     String    @unique
   password  String
   role      role
-  createdAt DateTime @default(now()) @db.Timestamp()
-  updatedAt DateTime @default(now()) @updatedAt @db.Timestamp()
+  createdAt DateTime  @default(now()) @db.Timestamp()
+  updatedAt DateTime  @default(now()) @updatedAt @db.Timestamp()
   Profile   Profile?
+  Subject   Subject[]
   Enroll    Enroll[]
 }
 
@@ -67,6 +68,8 @@ model Subject {
   updatedAt DateTime @default(now()) @db.Timestamp()
   Lesson    Lesson[]
   Enroll    Enroll[]
+  User      User?    @relation(fields: [userID], references: [userID])
+  userID    String?
 }
 
 model Lesson {

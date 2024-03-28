@@ -8,11 +8,16 @@ export const SubjectMutation = extendType({
     definition(t) {
         t.field("createSubject", {
             type: "subject",
-            args: { subject: nonNull(stringArg()), tags: nonNull(stringArg()) },
-            resolve: async (_, { subject, tags }): Promise<any> => {
+            args: { subject: nonNull(stringArg()), tags: nonNull(stringArg()), userID: nonNull(idArg()) },
+            resolve: async (_, { subject, tags, userID }): Promise<any> => {
                 return await prisma.subject.create({
                     data: {
-                        subject, tags
+                        subject, tags,
+                        User: {
+                            connect: {
+                                userID
+                            }
+                        }
                     }
                 })
             }
