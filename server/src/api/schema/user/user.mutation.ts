@@ -58,6 +58,8 @@ export const UserMutation = extendType({
             args: { username: nonNull(stringArg()), password: nonNull(stringArg()) },
             resolve: async (_, { username, password }, { req, res }): Promise<any> => {
 
+                if (!username) throw new GraphQLError("Username is required");
+                if (!password) throw new GraphQLError("Password is required")
 
                 const users = await prisma.user.findUnique({
                     where: {
