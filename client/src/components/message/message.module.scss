@@ -1,0 +1,16 @@
+.container {
+   width: 100%;
+   background-color: rgb(223, 124, 144);
+   padding: 20px 5px;
+   border-radius: 4px;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   span {
+      color: #fff;
+      font-size: 1.1rem;
+   }
+   svg {
+      stroke: #fff;
+   }
+}
