@@ -20,7 +20,7 @@ type Mutation {
   deleteSubject(subjectID: ID!): subject
   deleteSubjectLesson(lessonID: ID!): lesson
   deleteUserAccount(userID: ID!): user
-  login(password: String!, username: String!): user
+  login(password: String!, username: String!): token
   updatSubjectTags(subjectID: ID!, tags: String!): subject
   updateSubject(subject: String!, subjectID: ID!): subject
   updateSubjectLesson(lesson: String!, lessonID: ID!): lesson
@@ -49,7 +49,9 @@ type enroll {
   createdAt: DateTime
   enrollID: ID
   status: String
+  subject: subject
   updatedAt: DateTime
+  user: user
 }
 
 type lesson {
@@ -83,6 +85,10 @@ type subject {
   subjectID: ID
   tags: String
   updateAt: DateTime
+}
+
+type token {
+  token: String
 }
 
 type user {

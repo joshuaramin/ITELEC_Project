@@ -54,9 +54,9 @@ export const UserMutation = extendType({
             }
         })
         t.field("login", {
-            type: "user",
+            type: "token",
             args: { username: nonNull(stringArg()), password: nonNull(stringArg()) },
-            resolve: async (_, { username, password }, { res }): Promise<any> => {
+            resolve: async (_, { username, password }, { req, res }): Promise<any> => {
 
 
                 const users = await prisma.user.findUnique({
@@ -77,7 +77,7 @@ export const UserMutation = extendType({
                     expiresIn: 60 * 60 * 7 * 24
                 })
 
-                res.cookies("access_token", token)
+                res.cookie("access_token", token)
 
                 return { token }
             }

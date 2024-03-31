@@ -25,3 +25,10 @@ export const UserObject = objectType({
         })
     },
 })
+
+export const TokenObject = objectType({
+    name: "token",
+    definition(t) {
+        t.string("token")
+    }
+})

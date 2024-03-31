@@ -104,6 +104,9 @@ export interface NexusGenObjects {
     tags?: string | null; // String
     updateAt?: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  token: { // root type
+    token?: string | null; // String
+  }
   user: { // root type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     email?: string | null; // String
@@ -134,7 +137,7 @@ export interface NexusGenFieldTypes {
     deleteSubject: NexusGenRootTypes['subject'] | null; // subject
     deleteSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
     deleteUserAccount: NexusGenRootTypes['user'] | null; // user
-    login: NexusGenRootTypes['user'] | null; // user
+    login: NexusGenRootTypes['token'] | null; // token
     updatSubjectTags: NexusGenRootTypes['subject'] | null; // subject
     updateSubject: NexusGenRootTypes['subject'] | null; // subject
     updateSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
@@ -156,7 +159,9 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     enrollID: string | null; // ID
     status: string | null; // String
+    subject: NexusGenRootTypes['subject'] | null; // subject
     updatedAt: NexusGenScalars['DateTime'] | null; // DateTime
+    user: NexusGenRootTypes['user'] | null; // user
   }
   lesson: { // field return type
     lesson: string | null; // String
@@ -181,6 +186,9 @@ export interface NexusGenFieldTypes {
     tags: string | null; // String
     updateAt: NexusGenScalars['DateTime'] | null; // DateTime
   }
+  token: { // field return type
+    token: string | null; // String
+  }
   user: { // field return type
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     email: string | null; // String
@@ -202,7 +210,7 @@ export interface NexusGenFieldTypeNames {
     deleteSubject: 'subject'
     deleteSubjectLesson: 'lesson'
     deleteUserAccount: 'user'
-    login: 'user'
+    login: 'token'
     updatSubjectTags: 'subject'
     updateSubject: 'subject'
     updateSubjectLesson: 'lesson'
@@ -224,7 +232,9 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     enrollID: 'ID'
     status: 'String'
+    subject: 'subject'
     updatedAt: 'DateTime'
+    user: 'user'
   }
   lesson: { // field return type name
     lesson: 'String'
@@ -248,6 +258,9 @@ export interface NexusGenFieldTypeNames {
     subjectID: 'ID'
     tags: 'String'
     updateAt: 'DateTime'
+  }
+  token: { // field return type name
+    token: 'String'
   }
   user: { // field return type name
     createdAt: 'DateTime'
