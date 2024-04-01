@@ -13,7 +13,7 @@ export default function Header() {
             <a href='/auth/login'>
                <span>Login</span>
             </a>
-            <a href='/auth/login'>
+            <a href='/auth/register'>
                <span>Sign In</span>
             </a>
          </div>
