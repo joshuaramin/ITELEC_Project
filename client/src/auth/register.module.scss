@@ -1,0 +1,106 @@
+@import "../sass/variables.module";
+.container {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   form {
+      width: 100%;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 10px;
+      .mainContainer {
+         width: 500px;
+         height: 300px;
+         padding: 10px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         flex-direction: column;
+         gap: 15px;
+         h2 {
+            font-family: $ParentFont;
+            font-weight: 500;
+         }
+         .roles {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            user-select: none;
+            &:hover {
+               background-color: #f5f5f5;
+               border-radius: 3px;
+            }
+            .inlb {
+               width: 100%;
+               display: flex;
+               gap: 5px;
+               label {
+                  font-size: 1rem;
+                  font-family: $ChildFont;
+                  font-weight: $CFWeight;
+               }
+               span {
+                  font-size: 1rem;
+                  font-family: $ChildFont;
+                  font-weight: $CFWeight;
+               }
+            }
+         }
+         .number {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .countryCode {
+               width: 50px;
+               background-color: #f5f5f5;
+               border-top-left-radius: 5px;
+               border-bottom-left-radius: 5px;
+               padding: 12px 10px;
+               span {
+                  font-size: 1rem;
+                  font-family: $ChildFont;
+               }
+            }
+            input {
+               width: 300px;
+               padding: 10px;
+               border: none;
+               outline: none;
+               box-shadow: 0px 0px 3px 0px #ccc;
+               border-top-right-radius: 5px;
+               border-bottom-right-radius: 5px;
+               font-size: 1rem;
+               font-family: $ChildFont;
+            }
+         }
+      }
+      .btngrp {
+         width: 500px;
+         display: flex;
+         gap: 10px;
+         padding: 10px;
+         button {
+            padding: 15px 0;
+            width: 100%;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            span {
+               font-size: 15px;
+               font-family: $ChildFont;
+               font-weight: 700;
+            }
+         }
+      }
+   }
+}
