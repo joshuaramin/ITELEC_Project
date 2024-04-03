@@ -6,11 +6,14 @@ import { Link, Route, Routes } from "react-router-dom";
 import Student from "./dashboard/student/student";
 import Login from "./auth/login";
 import Register from "./auth/register";
-
+import Home from "./home/index";
 function App() {
    return (
       <div className={styles.container}>
          <Header />
+         <Routes>
+            <Route path='/' element={<Home />} />
+         </Routes>
          <Routes>
             <Route path='/auth/login/' element={<Login />} />
             <Route path='/auth/forgotpassword/' element={<Login />} />

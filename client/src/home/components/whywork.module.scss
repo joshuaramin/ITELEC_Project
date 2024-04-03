@@ -1,0 +1,20 @@
+@import "../../sass/variables.module";
+
+.container {
+   width: 100%;
+   display: grid;
+   align-items: center;
+   justify-content: center;
+   grid-template-columns: repeat(auto-fit, 350px);
+   height: 300px;
+   gap: 10px;
+   div {
+      text-align: center;
+      h2 {
+         font-family: $ParentFont;
+      }
+      span {
+         font-family: $ChildFont;
+      }
+   }
+}

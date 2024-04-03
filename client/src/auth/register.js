@@ -1,20 +1,8 @@
 import React, { useState } from "react";
 import styles from "./register.module.scss";
-
-const roles = [
-   {
-      name: "Professor",
-      value: "professor",
-      description:
-         "Our dedicated professors bring expertise and passion to guide students through our Free Online Academy's courses, fostering a culture of learning excellence.",
-   },
-   {
-      name: "Student",
-      value: "student",
-      description:
-         "You'll explore diverse subjects and engage with a vibrant community, all without any cost or commitment.",
-   },
-];
+import Role from "./component/role";
+import Phone from "./component/phone";
+import Email from "./component/email";
 
 export default function Register() {
    const [role, setRole] = useState("");
@@ -27,40 +15,10 @@ export default function Register() {
       <div className={styles.container}>
          <form>
             {step === 1 ? (
-               <div className={styles.mainContainer}>
-                  <h2>Are you a Professor or Student?</h2>
-                  {roles.map(({ name, value, description }) => (
-                     <div key={name} className={styles.roles}>
-                        <div className={styles.inlb}>
-                           <input
-                              type='radio'
-                              value={value}
-                              onChange={onHandleRoles}
-                              checked={value === role ? true : false}
-                           />
-                           <label>{name}</label>
-                        </div>
-                        <span>{description}</span>
-                     </div>
-                  ))}
-               </div>
+               <Role styles={styles} role={role} func={onHandleRoles} />
             ) : null}
-            {step === 2 ? (
-               <div className={styles.mainContainer}>
-                  <h2>Enter your Phone Nubmer</h2>
-                  <div className={styles.number}>
-                     <div className={styles.countryCode}>
-                        <span>+63</span>
-                     </div>
-                     <input
-                        maxLength={10}
-                        type='text'
-                        placeholder='9499144792'
-                     />
-                  </div>
-               </div>
-            ) : null}
-
+            {step === 2 ? <Phone styles={styles} /> : null}
+            {step === 3 ? <Email styles={styles} /> : null}
             <div className={styles.btngrp}>
                {" "}
                {step === 1 ? null : (
