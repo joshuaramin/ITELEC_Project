@@ -29,12 +29,12 @@
             background-color: #eee;
             color: #000;
             &:hover {
-               background-color: blue;
+               background-color: $PrimaryColor;
                color: #fff;
             }
          }
          &:nth-child(2) {
-            background-color: blue;
+            background-color: $PrimaryColor;
             color: #fff;
          }
       }

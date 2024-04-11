@@ -1,0 +1,77 @@
+@import "../../sass/variables.module";
+
+.container {
+   width: 100%;
+   height: auto;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 50px 30px;
+   @media screen and (max-width: 600px) {
+      flex-direction: column;
+   }
+   .gridContainer {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 420px);
+      grid-template-rows: repeat(auto-fit, 350px);
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      div {
+         width: 400px;
+         height: 300px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         background-color: #fff;
+         box-shadow: 0px 0px 3px 0px #ccc;
+         border-radius: 10px;
+         padding: 20px;
+         user-select: none;
+
+         p {
+            font-family: $ChildFont;
+            font-size: 18px;
+            padding: 10px 0;
+            font-weight: 1000;
+            color: $PrimaryColor;
+         }
+         span {
+            width: 100%;
+            font-family: $ParentFont;
+            font-size: 18px;
+         }
+         .role {
+            font-size: 14px;
+         }
+      }
+   }
+
+   .btnContainer {
+      width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button {
+         background-color: transparent;
+         padding: 10px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 100px;
+         border: none;
+         cursor: pointer;
+         &:hover {
+            background-color: $PrimaryColor;
+            svg {
+               stroke: #fff;
+            }
+         }
+         &:disabled {
+            display: none;
+         }
+      }
+   }
+}

@@ -12,11 +12,6 @@ const whyworks = [
          "Learn from industry experts and experienced educators who are passionate about sharing their knowledge and expertise with  you.",
    },
    {
-      name: "Interactive Learning",
-      description:
-         "Engage with multimedia content, interactive exercises, and real-world case studies to deepen your understanding and enhance your learning experience.",
-   },
-   {
       name: "Community Support",
       description:
          "Join a vibrant learning community of students, instructors, and professionals. Connect, collaborate, and network with like-minded individuals from around the world.",
@@ -31,12 +26,26 @@ const whyworks = [
 export default function WhyWorks() {
    return (
       <div className={styles.container}>
-         {whyworks.map(({ name, description }) => (
-            <div key={name}>
-               <h2>{name}</h2>
-               <span>{description}</span>
+         <div className={styles.titleContainer}>
+            <h2>Why School Academy?</h2>
+            <div className={styles.para}>
+               <span>
+                  Online Learning Platform, where education knows no boundaries!
+                  Explore our diverse range of courses and embark on a journey
+                  of discovery, growth, and transformation. Whether you're a
+                  lifelong learner, a career enthusiast, or a knowledge seeker,
+                  we have something for everyone.
+               </span>
             </div>
-         ))}
+         </div>
+         <div className={styles.gridContainer}>
+            {whyworks.map(({ name, description }) => (
+               <div key={name}>
+                  <h2>{name}</h2>
+                  <span>{description}</span>
+               </div>
+            ))}
+         </div>
       </div>
    );
 }

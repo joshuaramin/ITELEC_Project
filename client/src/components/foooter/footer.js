@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./footer.module.scss";
 export default function Footer() {
-   return <div className={styles.container}>Footer</div>;
+   const [date, setDate] = useState(new Date().getFullYear());
+   return (
+      <div className={styles.container}>
+         <div className={styles.links}></div>
+         <div className={styles.footer}>
+            <span> &copy; {date} School Academy. All Rights Reserved</span>
+         </div>
+      </div>
+   );
 }
