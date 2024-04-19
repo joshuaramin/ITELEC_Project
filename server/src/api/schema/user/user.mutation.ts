@@ -41,6 +41,42 @@ export const UserMutation = extendType({
                 })
             }
         })
+        t.field("checkUsernameAvailability", {
+            type: "user",
+            args: { username: nonNull(stringArg()) },
+            resolve: async (_, { username }): Promise<any> => {
+
+                if (!username) throw new GraphQLError("Username is required", {
+                    extensions: {
+                        status: 400
+                    }
+                });
+
+                const users = await prisma.user.findUnique({
+                    where: {
+                        username
+                    }
+                })
+
+                if (users) throw new GraphQLError("Username is already exist")
+
+                return users
+            }
+        })
+        t.field("updateVerfiedAccount", {
+            type: "user",
+            args: { userID: nonNull(idArg()) },
+            resolve: async (_, { userID }): Promise<UserInterface> => {
+                return await prisma.user.update({
+                    where: {
+                        userID
+                    },
+                    data: {
+                        verified: true
+                    }
+                })
+            }
+        })
 
         t.field("deleteUserAccount", {
             type: "user",
@@ -74,7 +110,7 @@ export const UserMutation = extendType({
 
                 if (!validPass) throw new GraphQLError("Password is incorrect. Try again");
 
-                const token = sign({ userID: users.userID }, "itelec", {
+                const token = sign({ userID: users.userID, role: users.role }, "itelec", {
                     algorithm: "HS256",
                     expiresIn: 60 * 60 * 7 * 24
                 })

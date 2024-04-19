@@ -61,7 +61,7 @@ const testimonial = [
 export default function Testimonial() {
    const [currentPage, setCurrenPage] = useState(1);
 
-   const totalPages = Math.ceil(testimonial.length / 6);
+   const totalPages = Math.ceil(testimonial.length / 2);
 
    const handleNextPage = () => {
       setCurrenPage((prevPage) => Math.min(prevPage + 1, totalPages));
@@ -72,8 +72,8 @@ export default function Testimonial() {
    };
 
    const paginatedTestimonials = testimonial.slice(
-      (currentPage - 1) * 6,
-      currentPage * 6
+      (currentPage - 1) * 2,
+      currentPage * 2
    );
    return (
       <div className={styles.container}>
@@ -84,7 +84,7 @@ export default function Testimonial() {
          </div>
          <div className={styles.gridContainer}>
             {paginatedTestimonials.map(({ name, testimonial, role }) => (
-               <div>
+               <div key={name}>
                   <p>{testimonial}</p>
                   <span> {name}</span>
                   <span className={styles.role}>{role}</span>

@@ -10,14 +10,17 @@ export const ProfileObject = objectType({
         t.string("fullname");
         t.date("birthday");
         t.phone("phone");
+        t.string("bio");
         t.datetime("createdAt");
         t.string("updatedAt");
         t.field("user", {
             type: "user",
             resolve: async ({ profileID }): Promise<any> => {
-                return await prisma.profile.findMany({
+                return await prisma.user.findFirst({
                     where: {
-                        profileID
+                        Profile: {
+                            profileID
+                        }
                     }
                 })
             }

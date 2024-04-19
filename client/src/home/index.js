@@ -3,25 +3,17 @@ import styles from "./page.module.scss";
 import WhyWorks from "./components/whyworks";
 import Testimonial from "./components/testimonial";
 import Card from "../components/card/card";
-
-const fakeData = [
-   { name: "AI for Everyone", author: "Andrew Ng" },
-   { name: "Javacsript Fundamentals", author: "Lorem Ipsum" },
-   {
-      name: "Complete Python Bootcamp from Zero to Hero",
-      author: "Lorem Ipsum",
-   },
-   { name: "Automate the Boring Stuff with Python", author: "Lorem Ipsum" },
-   {
-      name: "100 Days of Code: The Complete Python Course",
-      author: "Lorem Ipsum",
-   },
-   { name: "Javacsript Fundamentals", author: "Lorem Ipsum" },
-   { name: "Javacsript Fundamentals", author: "Lorem Ipsum" },
-   { name: "Javacsript Fundamentals", author: "Lorem Ipsum" },
-];
+import { GetAllSubject } from "../util/Query/subject";
+import { useQuery } from "@apollo/client";
 
 export default function Home() {
+   const { data, loading, error } = useQuery(GetAllSubject, {
+      variables: {
+         take: 10,
+         skip: 0,
+      },
+   });
+
    return (
       <div className={styles.container}>
          <div className={styles.quote}>
@@ -48,9 +40,29 @@ export default function Home() {
                <h2>Top Course</h2>
             </div>
             <div className={styles.cardGrid}>
-               {fakeData.map(({ name, author }) => (
-                  <Card name={name} author={author} />
-               ))}
+               {loading
+                  ? "Loading"
+                  : data?.getAllSubject.map(
+                       ({
+                          subjectID,
+                          subject,
+                          user,
+                          lessonCount,
+                          tags,
+                          image,
+                          description,
+                       }) => (
+                          <Card
+                             key={subjectID}
+                             id={subjectID}
+                             name={subject}
+                             image={image}
+                             author={user.profile.fullname}
+                             count={lessonCount}
+                             tags={tags}
+                          />
+                       )
+                    )}
             </div>
          </div>
 

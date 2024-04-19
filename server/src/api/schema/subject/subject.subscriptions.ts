@@ -1,16 +1,15 @@
-import { extendType } from "nexus";
-import { prisma } from "../../helpers/services";
+import { extendType, idArg, nonNull, subscriptionField } from "nexus";
+import { prisma, pubsub } from "../../helpers/services";
 
 
 
-export const SubjectQuery = extendType({
-    type: "Query",
-    definition(t) {
-        t.list.field("getAllSubjectList", {
-            type: "subject",
-            resolve: async (): Promise<any> => {
-                return await prisma.subject.findMany()
-            }
-        })
+export const SubjectQuery = subscriptionField("NewlySubjectCreatedByUser", {
+    type: "subject",
+    args: { userID: nonNull(idArg()) },
+    subscribe: async (): Promise<any> => {
+        return pubsub.asyncIterator("createSubejctBUserId")
     },
+    resolve: async (payload): Promise<any> => {
+        return await payload
+    }
 })

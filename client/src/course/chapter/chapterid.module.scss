@@ -1,0 +1,71 @@
+@import "../../sass/variables.module";
+
+.container {
+   width: 100%;
+   height: 100vh;
+   overflow-y: auto;
+   display: flex;
+   gap: 10px;
+   @media screen and (max-width: 900px) {
+      width: 100%;
+      position: relative;
+   }
+   .information {
+      width: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      .titleContainer {
+         width: 100%;
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            border-radius: 100px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+         }
+         h2 {
+            font-size: 2rem;
+            font-family: $ParentFont;
+            font-weight: 500;
+         }
+      }
+      div {
+         width: 100%;
+         padding: 10px;
+         @media screen and (max-width: 700px) {
+            width: 100%;
+         }
+
+         pre {
+            background-color: #0c3308;
+            padding: 10px;
+            color: #fff;
+            border-radius: 10px;
+         }
+         blockquote {
+            background-color: #ccc;
+            padding: 5px 10px;
+            font-style: italic;
+         }
+         ul {
+            padding: 0 40px;
+            li {
+            }
+         }
+         .ql-align-center {
+            width: 100%;
+            text-align: center;
+         }
+         p {
+            font-family: $ChildFont;
+         }
+      }
+   }
+}

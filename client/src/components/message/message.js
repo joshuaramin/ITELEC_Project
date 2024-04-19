@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./message.module.scss";
-import { TbCircleX } from "react-icons/tb";
+import { TbCircleCheck, TbCircleX } from "react-icons/tb";
 
 export default function Message({ message }) {
    return (
-      <div className={styles.container}>
-         <TbCircleX size={30} />
+      <div>
          <span>{message}</span>
       </div>
    );

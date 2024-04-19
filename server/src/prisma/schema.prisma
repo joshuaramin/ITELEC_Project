@@ -24,12 +24,18 @@ enum EnrollStatus {
   Drop
 }
 
+enum ChapterStatus {
+  reading
+  done
+}
+
 model User {
   userID    String    @id @default(cuid())
   username  String    @unique
   email     String    @unique
   password  String
   role      role
+  verified  Boolean   @default(false)
   createdAt DateTime  @default(now()) @db.Timestamp()
   updatedAt DateTime  @default(now()) @updatedAt @db.Timestamp()
   Profile   Profile?
@@ -42,6 +48,7 @@ model Profile {
   fullname  String
   birthday  DateTime @db.Date
   phone     String
+  bio       String?
   createdAt DateTime @default(now()) @db.Timestamp()
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamp()
   User      User?    @relation(fields: [userID], references: [userID])
@@ -53,23 +60,34 @@ model Enroll {
   status    EnrollStatus @default(Enrolled)
   createdAt DateTime     @default(now()) @db.Timestamp()
   updatedAt DateTime     @default(now()) @updatedAt @db.Timestamp()
-
-  User      User?    @relation(fields: [userID], references: [userID])
+  User      User?        @relation(fields: [userID], references: [userID])
   userID    String?
-  Subject   Subject? @relation(fields: [subjectID], references: [subjectID])
+  Subject   Subject?     @relation(fields: [subjectID], references: [subjectID])
   subjectID String?
 }
 
+model Category {
+  categoryID String    @id @default(cuid())
+  category   String
+  Subject    Subject[]
+  createdAt  DateTime  @default(now()) @db.Timestamp()
+  updatedAt  DateTime  @default(now()) @updatedAt @db.Timestamp()
+}
+
 model Subject {
-  subjectID String   @id @default(cuid())
-  subject   String
-  tags      String
-  createdAt DateTime @default(now()) @db.Timestamp()
-  updatedAt DateTime @default(now()) @db.Timestamp()
-  Lesson    Lesson[]
-  Enroll    Enroll[]
-  User      User?    @relation(fields: [userID], references: [userID])
-  userID    String?
+  subjectID   String    @id @default(cuid())
+  subject     String
+  image       String
+  description String
+  language    String
+  createdAt   DateTime  @default(now()) @db.Timestamp()
+  updatedAt   DateTime  @default(now()) @db.Timestamp()
+  Lesson      Lesson[]
+  Enroll      Enroll[]
+  User        User?     @relation(fields: [userID], references: [userID])
+  userID      String?
+  Category    Category? @relation(fields: [categoryID], references: [categoryID])
+  categoryID  String?
 }
 
 model Lesson {
@@ -78,8 +96,20 @@ model Lesson {
   createdAt  DateTime     @default(now()) @db.Timestamp()
   updatedAt  DateTime     @default(now()) @updatedAt @db.Timestamp()
   Assessment Assessment[]
-  Subject    Subject?     @relation(fields: [subjectID], references: [subjectID])
+  Chapter    Chapter[]
+  Subject    Subject?     @relation(fields: [subjectID], references: [subjectID], onDelete: Cascade)
   subjectID  String?
+}
+
+model Chapter {
+  chapterID String        @id @default(cuid())
+  chapter   String
+  content   String
+  status    ChapterStatus
+  createdAt DateTime      @default(now()) @db.Timestamp()
+  updatedAt DateTime      @default(now()) @updatedAt @db.Timestamp()
+  Lesson    Lesson?       @relation(fields: [lessonID], references: [lessonID], onDelete: Cascade)
+  lessonID  String?
 }
 
 model Assessment {
@@ -87,6 +117,6 @@ model Assessment {
   assessment   String
   createdAt    DateTime @default(now()) @db.Timestamp()
   updatedAt    DateTime @default(now()) @updatedAt @db.Timestamp()
-  Lesson       Lesson?  @relation(fields: [lessonID], references: [lessonID])
+  Lesson       Lesson?  @relation(fields: [lessonID], references: [lessonID], onDelete: Cascade)
   lessonID     String?
 }

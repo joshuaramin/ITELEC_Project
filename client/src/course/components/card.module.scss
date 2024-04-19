@@ -1,0 +1,67 @@
+@import "../../sass/variables.module";
+
+.container {
+   .course {
+      width: 100%;
+      .courseHeader {
+         padding: 10px 0;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         h2 {
+            font-family: $ParentFont;
+            font-size: 18px;
+         }
+         button {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            border-radius: 100px;
+            &:hover {
+               background-color: $PrimaryColor;
+               svg {
+                  stroke: #fff;
+               }
+            }
+         }
+      }
+      .topicContainer {
+         width: 100%;
+         padding: 0 8px;
+
+         .topic {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 45px;
+            svg {
+               stroke-width: 1.5px;
+            }
+
+            .info {
+               display: flex;
+               align-items: center;
+               gap: 5px;
+               h2 {
+                  font-family: $ChildFont;
+                  font-size: 17px;
+                  cursor: pointer;
+               }
+               &:hover {
+                  svg {
+                     stroke: $PrimaryColor;
+                  }
+                  h2 {
+                     color: $PrimaryColor;
+                  }
+               }
+            }
+         }
+      }
+   }
+}

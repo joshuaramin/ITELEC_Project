@@ -4,6 +4,9 @@ CREATE TYPE "role" AS ENUM ('admin', 'professor', 'student');
 -- CreateEnum
 CREATE TYPE "EnrollStatus" AS ENUM ('Enrolled', 'Drop');
 
+-- CreateEnum
+CREATE TYPE "ChapterStatus" AS ENUM ('reading', 'done');
+
 -- CreateTable
 CREATE TABLE "User" (
     "userID" TEXT NOT NULL,
@@ -11,6 +14,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" "role" NOT NULL,
+    "verified" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -23,6 +27,7 @@ CREATE TABLE "Profile" (
     "fullname" TEXT NOT NULL,
     "birthday" DATE NOT NULL,
     "phone" TEXT NOT NULL,
+    "bio" TEXT,
     "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userID" TEXT,
@@ -43,13 +48,26 @@ CREATE TABLE "Enroll" (
 );
 
 -- CreateTable
+CREATE TABLE "Category" (
+    "categoryID" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Category_pkey" PRIMARY KEY ("categoryID")
+);
+
+-- CreateTable
 CREATE TABLE "Subject" (
     "subjectID" TEXT NOT NULL,
     "subject" TEXT NOT NULL,
-    "tags" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "language" TEXT NOT NULL,
     "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userID" TEXT,
+    "categoryID" TEXT,
 
     CONSTRAINT "Subject_pkey" PRIMARY KEY ("subjectID")
 );
@@ -63,6 +81,19 @@ CREATE TABLE "Lesson" (
     "subjectID" TEXT,
 
     CONSTRAINT "Lesson_pkey" PRIMARY KEY ("lessonID")
+);
+
+-- CreateTable
+CREATE TABLE "Chapter" (
+    "chapterID" TEXT NOT NULL,
+    "chapter" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "status" "ChapterStatus" NOT NULL,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "lessonID" TEXT,
+
+    CONSTRAINT "Chapter_pkey" PRIMARY KEY ("chapterID")
 );
 
 -- CreateTable
@@ -98,7 +129,13 @@ ALTER TABLE "Enroll" ADD CONSTRAINT "Enroll_subjectID_fkey" FOREIGN KEY ("subjec
 ALTER TABLE "Subject" ADD CONSTRAINT "Subject_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User"("userID") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_subjectID_fkey" FOREIGN KEY ("subjectID") REFERENCES "Subject"("subjectID") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Subject" ADD CONSTRAINT "Subject_categoryID_fkey" FOREIGN KEY ("categoryID") REFERENCES "Category"("categoryID") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Assessment" ADD CONSTRAINT "Assessment_lessonID_fkey" FOREIGN KEY ("lessonID") REFERENCES "Lesson"("lessonID") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_subjectID_fkey" FOREIGN KEY ("subjectID") REFERENCES "Subject"("subjectID") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Chapter" ADD CONSTRAINT "Chapter_lessonID_fkey" FOREIGN KEY ("lessonID") REFERENCES "Lesson"("lessonID") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Assessment" ADD CONSTRAINT "Assessment_lessonID_fkey" FOREIGN KEY ("lessonID") REFERENCES "Lesson"("lessonID") ON DELETE CASCADE ON UPDATE CASCADE;

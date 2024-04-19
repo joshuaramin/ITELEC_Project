@@ -3,7 +3,13 @@ import styles from "./login.module.scss";
 import { LOGINAUTHENTICATIOn } from "../util/Mutation/auth";
 import { useMutation } from "@apollo/client";
 import Message from "../components/message/message";
+import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
 export default function Login() {
+   const router = useNavigate();
+
    const [user, setUsers] = useState({
       email: "",
       password: "",
@@ -20,7 +26,19 @@ export default function Login() {
             password: user.password,
          },
          onCompleted: (data) => {
-            console.log(data);
+            Cookies.set("access_token", data.login.token, {
+               expires: 60 * 60 * 7 * 24,
+               path: "/",
+               sameSite: "none",
+               secure: true,
+            });
+
+            const getCookies = Cookies.get("access_token");
+
+            const decodeToken = jwtDecode(getCookies);
+
+            router(`/dashboard/${decodeToken.role}`);
+            window.location.reload();
          },
          onError: (err) => {
             console.error(err.message);

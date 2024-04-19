@@ -1,0 +1,29 @@
+@import "../../../../../sass/variables.module";
+
+.container {
+   width: 100%;
+   height: 60px;
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   border-top-left-radius: 5px;
+   border-bottom-left-radius: 5px;
+   padding: 10px 15px;
+   &:hover {
+      background-color: #fff;
+      svg {
+         stroke: $PrimaryColor;
+      }
+      span {
+         color: $PrimaryColor;
+      }
+   }
+   cursor: pointer;
+   svg {
+      stroke: #fff;
+      stroke-width: 1.5px;
+   }
+   span {
+      color: #fff;
+   }
+}

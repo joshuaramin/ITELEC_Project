@@ -18,24 +18,24 @@ export interface ProfileInterface {
     fullname: string
     birthday: any
     phone: string
+    bio: string
     createdAt: any
     updatedAt: any
 }
 
 export interface EnrollInterface {
     status: any
-    Subject: SubjectInterface[] | SubjectInterface
 }
 
 export interface SubjectInterface {
     subject: string
-    tags: string
-    Lesson: LessonInterface[] | LessonInterface
+    language: string
+    description: string
+    image: string
 }
 
 export interface LessonInterface {
     lesson: string
-    Assessmenet: AssessmentInterface[] | AssessmentInterface
 }
 
 export interface AssessmentInterface {

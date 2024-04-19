@@ -1,6 +1,6 @@
 import { extendType, idArg, list, nonNull, stringArg } from "nexus";
 import { prisma } from "../../../helpers/services";
-
+import { pubsub } from "../../../helpers/services";
 
 
 export const LessonMutation = extendType({
@@ -10,7 +10,7 @@ export const LessonMutation = extendType({
             type: "lesson",
             args: { lesson: nonNull(stringArg()), subjectID: nonNull(idArg()) },
             resolve: async (_, { lesson, subjectID }): Promise<any> => {
-                return await prisma.lesson.create({
+                const subjectLesson = await prisma.lesson.create({
                     data: {
                         lesson,
                         Subject: {
@@ -20,6 +20,10 @@ export const LessonMutation = extendType({
                         }
                     },
                 })
+
+                pubsub.publish("createdSubjectLesson", subjectLesson)
+
+                return subjectLesson
             }
         })
         t.field("updateSubjectLesson", {

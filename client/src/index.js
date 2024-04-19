@@ -3,12 +3,46 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import {
+   ApolloProvider,
+   ApolloClient,
+   InMemoryCache,
+   split,
+} from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
+import { getMainDefinition } from "@apollo/client/utilities";
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { createClient } from "graphql-ws";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const client = new ApolloClient({
+const UploadLink = createUploadLink({
    uri: "http://localhost:4000/graphql",
+   headers: {
+      "apollo-require-preflight": true,
+   },
+});
+
+const wsLink = new GraphQLWsLink(
+   createClient({
+      url: "ws://localhost:4000/graphql",
+   })
+);
+
+const splitLink = split(
+   ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+         definition.kind === "OperationDefinition" &&
+         definition.operation === "subscription"
+      );
+   },
+   wsLink,
+   UploadLink
+);
+
+const client = new ApolloClient({
+   link: splitLink,
    cache: new InMemoryCache(),
 });
 

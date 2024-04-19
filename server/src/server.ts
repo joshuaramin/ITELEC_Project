@@ -12,6 +12,7 @@ import bodyParser from 'body-parser'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
 import { WebSocketServer } from 'ws';
+import { graphqlUploadExpress } from 'graphql-upload-ts'
 
 dotenv.config();
 const { json } = bodyParser;
@@ -62,6 +63,8 @@ import * as Scalars from './api/schema/scalar/index'
             }
         } ]
     })
+
+    app.use(graphqlUploadExpress())
 
     await server.start()
 

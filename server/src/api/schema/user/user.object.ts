@@ -10,6 +10,7 @@ export const UserObject = objectType({
         t.string("username");
         t.string("email");
         t.string("password");
+        t.boolean("verified");
         t.string("role");
         t.datetime("createdAt");
         t.datetime("updatedAt");

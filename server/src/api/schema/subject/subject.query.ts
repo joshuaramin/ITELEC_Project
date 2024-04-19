@@ -16,23 +16,46 @@ export const SubjectQuery = extendType({
                 })
             }
         })
-        t.field("getSubjectTags", {
+        t.list.field("getMySubjectCreated", {
             type: "subject",
-            args: { tags: nonNull(stringArg()) },
-            resolve: async (_, { tags }): Promise<any> => {
+            args: { userID: nonNull(idArg()) },
+            resolve: async (_, { userID }): Promise<any> => {
                 return await prisma.subject.findMany({
                     where: {
-                        tags
+                        User: {
+                            Subject: {
+                                some: {
+                                    userID
+                                }
+                            }
+                        }
                     }
                 })
             }
         })
-        t.field("getSubejectById", {
+        t.field("getSubjectById", {
             type: "subject",
             args: { subjectID: nonNull(idArg()) },
             resolve: async (_, { subjectID }): Promise<any> => {
                 return await prisma.subject.findFirst({
                     where: { subjectID }
+                })
+            }
+        })
+        t.list.field("getMySubjectSearch", {
+            type: "subject",
+            args: { search: nonNull(stringArg()), userID: nonNull(idArg()) },
+            resolve: async (_, { search, userID }): Promise<any> => {
+                return await prisma.subject.findMany({
+                    where: {
+                        User: {
+                            userID
+                        },
+                        subject: {  
+                            contains: search,
+                            mode: "insensitive"
+                        }
+                    }
                 })
             }
         })

@@ -1,0 +1,83 @@
+@import "../../../../sass/variables.module";
+
+.container {
+   width: 300px;
+   height: 400px;
+   border-radius: 10px;
+   position: relative;
+   background-color: #fff;
+   &:hover {
+      .deleteContainer {
+         width: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: flex-end;
+         padding: 10px;
+         position: absolute;
+         top: 0;
+
+         .deleteBtn {
+            background-color: transparent;
+            border-radius: 100px;
+            height: 40px;
+            width: 40px;
+            border: none;
+            cursor: pointer;
+            &:hover {
+               background-color: red;
+               svg {
+                  stroke: #fff;
+               }
+            }
+            svg {
+               stroke: red;
+            }
+         }
+      }
+   }
+   .deleteContainer {
+      display: none;
+   }
+   .avatar {
+      border-radius: 5px;
+      overflow: hidden;
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+      z-index: -1;
+   }
+   .info {
+      padding: 0 10px;
+      height: 50px;
+      display: flex;
+      h2 {
+         font-size: 1.1rem;
+         font-family: $ParentFont;
+         font-weight: 500;
+         cursor: pointer;
+         &:hover {
+            color: $PrimaryColor;
+            text-decoration: underline $PrimaryColor;
+         }
+      }
+   }
+   .body {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 0 10px;
+      .topicContainer {
+         padding: 0 20px;
+         li {
+            font-weight: 400;
+            cursor: pointer;
+            &:hover {
+               color: $PrimaryColor;
+
+               text-decoration: underline $PrimaryColor;
+            }
+         }
+      }
+   }
+}

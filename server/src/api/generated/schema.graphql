@@ -13,18 +13,23 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 scalar DateTime
 
 type Mutation {
-  createSubject(subject: String!, tags: String!, userID: ID!): subject
+  checkUsernameAvailability(username: String!): user
+  createLessonChapter(chapter: String!, content: String!, lessonID: ID!): chapter
+  createSubject(categoryID: ID!, file: Upload!, input: subjectInput, userID: ID!): subject
+  createSubjectCategory(category: String!): category
   createSubjectEnroll(subjectID: ID!, userID: ID!): enroll
   createSubjectLesson(lesson: String!, subjectID: ID!): lesson
   createUserAccount(role: userRoles, user: userInput): user
   deleteSubject(subjectID: ID!): subject
+  deleteSubjectCategory(categoryID: ID!): category
   deleteSubjectLesson(lessonID: ID!): lesson
   deleteUserAccount(userID: ID!): user
   login(password: String!, username: String!): token
-  updatSubjectTags(subjectID: ID!, tags: String!): subject
+  updateLessonChapter(chapter: String!, chapterID: ID!, content: String!): chapter
   updateSubject(subject: String!, subjectID: ID!): subject
   updateSubjectLesson(lesson: String!, lessonID: ID!): lesson
   updateUserProfile(input: profileInput): profile
+  updateVerfiedAccount(userID: ID!): user
 }
 
 """
@@ -33,16 +38,43 @@ A field whose value conforms to the standard E.164 format as specified in: https
 scalar PhoneNumber
 
 type Query {
-  getAllLesson: [lesson]
+  getAllCategory: [category]
+  getAllChapterByLessonID(lessonID: ID!): [chapter]
   getAllSubject(skip: Int!, take: Int!): [subject]
-  getAllSubjectList: [subject]
+  getAllSubjectLesson(subjectID: ID!): [lesson]
   getAllUserByRole(role: userRoles, skip: Int!, take: Int!): [user]
   getEnrollendById(enrollID: ID!): enroll
-  getSubejectById(subjectID: ID!): subject
+  getLessonChapter(chapterID: ID!): chapter
+  getMySubjectCreated(userID: ID!): [subject]
+  getMySubjectSearch(search: String!, userID: ID!): [subject]
+  getSubjectById(subjectID: ID!): subject
   getSubjectBySearch(search: String!): [subject]
-  getSubjectTags(tags: String!): subject
+  getSubjectLessonID(lessonID: ID!): lesson
   getUserById(userID: ID!): [user]
   getUserProfileById(userID: ID!): profile
+}
+
+type Subscription {
+  NewlyCreatedSubjectLesson(subjectID: ID!): lesson
+  NewlySubjectCreatedByUser(userID: ID!): subject
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type category {
+  category: String
+  categoryID: ID
+  subject: [subject]
+}
+
+type chapter {
+  chapter: String
+  chapterID: ID
+  content: String
+  createdAt: DateTime
+  status: String
+  updatedAt: DateTime
 }
 
 type enroll {
@@ -55,12 +87,15 @@ type enroll {
 }
 
 type lesson {
+  assessmentCount: Int
+  chapter: [chapter]
+  chapterCount: Int
   lesson: String
   lessonID: ID
-  tags: [String]
 }
 
 type profile {
+  bio: String
   birthday: Date
   createdAt: DateTime
   fullname: String
@@ -79,12 +114,23 @@ input profileInput {
 
 type subject {
   createdAt: DateTime
+  description: String
   enrolled: [enroll]
+  image: String
+  language: String
+  lessonCount: Int
   lessons: [lesson]
   subject: String
   subjectID: ID
   tags: String
-  updateAt: DateTime
+  updatedAt: DateTime
+  user: user
+}
+
+input subjectInput {
+  description: String
+  language: String
+  subject: String
 }
 
 type token {
@@ -100,6 +146,7 @@ type user {
   updatedAt: DateTime
   userID: ID
   username: String
+  verified: Boolean
 }
 
 input userInput {
