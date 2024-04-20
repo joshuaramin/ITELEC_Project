@@ -1,30 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./header.module.scss";
-import Search from "./search/search";
 import Cookies from "js-cookie";
-import Profile from "./profile/profile";
+import Web from "./web/web";
+import Mobile from "./mobile/mobile";
 
 export default function Header() {
    const token = Cookies.get("access_token");
 
+   const [width, setWidth] = useState(null);
+
+   useEffect(() => {
+      const getWindowWidth = () => {
+         setWidth(window.innerWidth);
+      };
+
+      window.addEventListener("resize", getWindowWidth);
+
+      return () => window.removeEventListener("resize", getWindowWidth);
+   });
+
    return (
       <div className={styles.container}>
-         <div>
-            <h2>School Academy</h2>
-         </div>
-         <Search />
-         {token ? (
-            <Profile token={token} />
-         ) : (
-            <div className={styles.auth}>
-               <a href='/auth/login'>
-                  <span>Login</span>
-               </a>
-               <a href='/auth/register'>
-                  <span>Sign In</span>
-               </a>
-            </div>
-         )}
+         {width < 900 ? <Mobile token={token} /> : <Web token={token} />}
       </div>
    );
 }
