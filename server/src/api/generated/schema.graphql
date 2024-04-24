@@ -20,14 +20,17 @@ type Mutation {
   createSubjectEnroll(subjectID: ID!, userID: ID!): enroll
   createSubjectLesson(lesson: String!, subjectID: ID!): lesson
   createUserAccount(role: userRoles, user: userInput): user
+  deleteLessonChapter(chapterID: ID!): chapter
   deleteSubject(subjectID: ID!): subject
   deleteSubjectCategory(categoryID: ID!): category
   deleteSubjectLesson(lessonID: ID!): lesson
   deleteUserAccount(userID: ID!): user
+  findMyEmailAddress(email: String!): user
   login(password: String!, username: String!): token
+  resetUserPassword(password: String!, retype: String!, userID: ID!): user
   updateLessonChapter(chapter: String!, chapterID: ID!, content: String!): chapter
-  updateSubject(subject: String!, subjectID: ID!): subject
-  updateSubjectLesson(lesson: String!, lessonID: ID!): lesson
+  updateSubjectLessonTitle(lesson: String!, lessonID: ID!): lesson
+  updateSubjectTitle(subject: String!, subjectID: ID!): subject
   updateUserProfile(input: profileInput): profile
   updateVerfiedAccount(userID: ID!): user
 }
@@ -56,6 +59,7 @@ type Query {
 
 type Subscription {
   NewlyCreatedSubjectLesson(subjectID: ID!): lesson
+  NewlyLessonChapterSubscription(lessonID: ID!): chapter
   NewlySubjectCreatedByUser(userID: ID!): subject
 }
 

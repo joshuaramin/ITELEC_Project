@@ -13,6 +13,9 @@ export const LessonQuery = extendType({
                 return await prisma.lesson.findMany({
                     where: {
                         subjectID
+                    },
+                    orderBy: {
+                        createdAt: 'asc'
                     }
                 })
             }

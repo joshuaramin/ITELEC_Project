@@ -16,6 +16,9 @@ export const ChapterQuery = extendType({
                 return await prisma.chapter.findFirst({
                     where: {
                         chapterID
+                    },
+                    orderBy: {
+                        createdAt: 'asc'
                     }
                 })
             }
@@ -29,6 +32,9 @@ export const ChapterQuery = extendType({
                         Lesson: {
                             lessonID
                         }
+                    },
+                    orderBy: {
+                        createdAt: 'asc'
                     }
                 })
             }

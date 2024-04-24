@@ -168,14 +168,17 @@ export interface NexusGenFieldTypes {
     createSubjectEnroll: NexusGenRootTypes['enroll'] | null; // enroll
     createSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
     createUserAccount: NexusGenRootTypes['user'] | null; // user
+    deleteLessonChapter: NexusGenRootTypes['chapter'] | null; // chapter
     deleteSubject: NexusGenRootTypes['subject'] | null; // subject
     deleteSubjectCategory: NexusGenRootTypes['category'] | null; // category
     deleteSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
     deleteUserAccount: NexusGenRootTypes['user'] | null; // user
+    findMyEmailAddress: NexusGenRootTypes['user'] | null; // user
     login: NexusGenRootTypes['token'] | null; // token
+    resetUserPassword: NexusGenRootTypes['user'] | null; // user
     updateLessonChapter: NexusGenRootTypes['chapter'] | null; // chapter
-    updateSubject: NexusGenRootTypes['subject'] | null; // subject
-    updateSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
+    updateSubjectLessonTitle: NexusGenRootTypes['lesson'] | null; // lesson
+    updateSubjectTitle: NexusGenRootTypes['subject'] | null; // subject
     updateUserProfile: NexusGenRootTypes['profile'] | null; // profile
     updateVerfiedAccount: NexusGenRootTypes['user'] | null; // user
   }
@@ -197,6 +200,7 @@ export interface NexusGenFieldTypes {
   }
   Subscription: { // field return type
     NewlyCreatedSubjectLesson: NexusGenRootTypes['lesson'] | null; // lesson
+    NewlyLessonChapterSubscription: NexusGenRootTypes['chapter'] | null; // chapter
     NewlySubjectCreatedByUser: NexusGenRootTypes['subject'] | null; // subject
   }
   category: { // field return type
@@ -276,14 +280,17 @@ export interface NexusGenFieldTypeNames {
     createSubjectEnroll: 'enroll'
     createSubjectLesson: 'lesson'
     createUserAccount: 'user'
+    deleteLessonChapter: 'chapter'
     deleteSubject: 'subject'
     deleteSubjectCategory: 'category'
     deleteSubjectLesson: 'lesson'
     deleteUserAccount: 'user'
+    findMyEmailAddress: 'user'
     login: 'token'
+    resetUserPassword: 'user'
     updateLessonChapter: 'chapter'
-    updateSubject: 'subject'
-    updateSubjectLesson: 'lesson'
+    updateSubjectLessonTitle: 'lesson'
+    updateSubjectTitle: 'subject'
     updateUserProfile: 'profile'
     updateVerfiedAccount: 'user'
   }
@@ -305,6 +312,7 @@ export interface NexusGenFieldTypeNames {
   }
   Subscription: { // field return type name
     NewlyCreatedSubjectLesson: 'lesson'
+    NewlyLessonChapterSubscription: 'chapter'
     NewlySubjectCreatedByUser: 'subject'
   }
   category: { // field return type name
@@ -406,6 +414,9 @@ export interface NexusGenArgTypes {
       role?: NexusGenEnums['userRoles'] | null; // userRoles
       user?: NexusGenInputs['userInput'] | null; // userInput
     }
+    deleteLessonChapter: { // args
+      chapterID: string; // ID!
+    }
     deleteSubject: { // args
       subjectID: string; // ID!
     }
@@ -418,22 +429,30 @@ export interface NexusGenArgTypes {
     deleteUserAccount: { // args
       userID: string; // ID!
     }
+    findMyEmailAddress: { // args
+      email: string; // String!
+    }
     login: { // args
       password: string; // String!
       username: string; // String!
+    }
+    resetUserPassword: { // args
+      password: string; // String!
+      retype: string; // String!
+      userID: string; // ID!
     }
     updateLessonChapter: { // args
       chapter: string; // String!
       chapterID: string; // ID!
       content: string; // String!
     }
-    updateSubject: { // args
-      subject: string; // String!
-      subjectID: string; // ID!
-    }
-    updateSubjectLesson: { // args
+    updateSubjectLessonTitle: { // args
       lesson: string; // String!
       lessonID: string; // ID!
+    }
+    updateSubjectTitle: { // args
+      subject: string; // String!
+      subjectID: string; // ID!
     }
     updateUserProfile: { // args
       input?: NexusGenInputs['profileInput'] | null; // profileInput
@@ -490,6 +509,9 @@ export interface NexusGenArgTypes {
   Subscription: {
     NewlyCreatedSubjectLesson: { // args
       subjectID: string; // ID!
+    }
+    NewlyLessonChapterSubscription: { // args
+      lessonID: string; // ID!
     }
     NewlySubjectCreatedByUser: { // args
       userID: string; // ID!
