@@ -1,70 +1,79 @@
 @import "../sass/variables.module";
 
 .container {
-   width: 100%;
-   min-height: 100vh;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   .main {
-      width: 100%;
-      background-color: #3b3b3b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .header {
-         width: 70%;
-         height: 600px;
-         display: flex;
-         justify-content: center;
-         flex-direction: column;
-         @media screen and (max-width: 900px) {
-            width: 100%;
-            padding: 20px;
-            h2 {
-               font-size: 14px;
-            }
-         }
-         h2 {
-            font-family: $ParentFont;
-            font-size: 2rem;
-            color: #fff;
-            font-weight: 500;
-         }
-         p {
-            font-size: 1.1rem;
-            color: #fff;
-         }
-      }
-   }
-   .content {
-      width: 70%;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .main {
+    width: 100%;
+    background-color: #3b3b3b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    .header {
+      width: 700px;
+      height: 520px;
       display: flex;
       justify-content: center;
       flex-direction: column;
-      gap: 20px;
-      padding: 50px 0;
+      gap: 10px;
       @media screen and (max-width: 900px) {
-         width: 100%;
-         padding: 10px;
+        width: 100%;
+        padding: 20px;
+        h2 {
+          font-size: 32.5rem;
+        }
       }
+      h2 {
+        font-family: $ParentFont;
+        font-size: 3.5rem;
+        color: #fff;
+        font-weight: 500;
+      }
+      p {
+        font-size: 1.1rem;
+        text-align: justify;
+        color: #fff;
+      }
+    }
+  }
+  .content {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px 0;
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      padding: 10px;
       .description,
       .lesson {
-         display: flex;
-         flex-direction: column;
-         gap: 10px;
-         h2 {
-            font-size: 22px;
-            font-family: $ParentFont;
-            font-weight: 500;
-         }
+        h2 {
+          font-size: 16px;
+        }
       }
-      .description {
-         p {
-            font-size: 1.1rem;
-            font-family: $ChildFont;
-            font-weight: 100;
-         }
+    }
+    .description,
+    .lesson {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      h2 {
+        font-size: 25px;
+        font-family: $ParentFont;
+        font-weight: 500;
       }
-   }
+    }
+    .description {
+      p {
+        font-size: 1.3rem;
+        font-family: $ChildFont;
+        font-weight: 100;
+      }
+    }
+  }
 }

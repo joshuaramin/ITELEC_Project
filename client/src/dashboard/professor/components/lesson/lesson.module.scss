@@ -1,170 +1,86 @@
 @import "../../../../sass/variables.module";
 
 .container {
-   width: 100%;
-   .addChapter {
-      width: 100%;
-      position: absolute;
-      inset: 0;
+  width: 100%;
+  .lessonHover {
+    width: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .lessonContainer {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    border-radius: 5px;
+    padding: 0 10px;
+
+    .btnGrp {
+      display: flex;
+      align-items: center;
+    }
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3 {
+      font-family: $ParentFont;
+      cursor: pointer;
+      font-weight: 500;
+      &:hover {
+        color: $PrimaryColor;
+        text-decoration: underline $PrimaryColor;
+      }
+    }
+    button {
+      background-color: transparent;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      border: none;
+      outline: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: rgba(255, 255, 255, 0.8);
-   }
-   .lessonContainer {
-      width: 100%;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      user-select: none;
-      border-radius: 5px;
-      padding: 0 10px;
+      cursor: pointer;
+      svg {
+        stroke-width: 1.5px;
+      }
+    }
+    .editBtn,
+    .trashBtn,
+    .addBtn {
+      display: none;
+    }
+    &:hover {
+      background-color: #f5f5f5;
 
-      .btnGrp {
-         display: flex;
-         align-items: center;
-      }
-      .toggle {
-         display: flex;
-         align-items: center;
-         gap: 8px;
-      }
-      h3 {
-         font-family: $ParentFont;
-         cursor: pointer;
-         font-weight: 500;
-         &:hover {
-            color: $PrimaryColor;
-            text-decoration: underline $PrimaryColor;
-         }
-      }
       button {
-         background-color: transparent;
-         width: 40px;
-         height: 40px;
-         border-radius: 100px;
-         border: none;
-         outline: none;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         cursor: pointer;
-         svg {
-            stroke-width: 1.5px;
-         }
+        background-color: #f5f5f5;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        svg {
+          stroke-width: 1.5px;
+        }
       }
-      .editBtn,
-      .trashBtn,
-      .addBtn {
-         display: none;
-      }
-      &:hover {
-         background-color: #f5f5f5;
-
-         button {
-            background-color: #f5f5f5;
-            width: 40px;
-            height: 40px;
-            border-radius: 100px;
-            border: none;
-            outline: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            svg {
-               stroke-width: 1.5px;
-            }
-         }
-      }
-   }
-   .chapter {
-      width: 100%;
-      padding: 0 50px;
-      .chapterCard {
-         width: 100%;
-         height: 60px;
-         display: flex;
-         align-items: center;
-         justify-content: space-between;
-         padding: 0 10px;
-         border-radius: 5px;
-         .info {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            svg {
-               stroke-width: 1.5px;
-            }
-            span {
-               cursor: pointer;
-            }
-         }
-         .btnGrp {
-            display: flex;
-            gap: 5px;
-         }
-
-         button {
-            display: none;
-         }
-         &:hover {
-            background-color: #f5f5f5;
-            .info {
-               svg {
-                  stroke: $PrimaryColor;
-               }
-               h2 {
-                  color: $PrimaryColor;
-               }
-            }
-            button {
-               background-color: #f5f5f5;
-               width: 40px;
-               height: 40px;
-               border-radius: 100px;
-               border: none;
-               outline: none;
-               display: flex;
-               align-items: center;
-               justify-content: center;
-               cursor: pointer;
-               svg {
-                  stroke-width: 1.5px;
-               }
-            }
-         }
-      }
-      .addTopic {
-         width: 100%;
-         button {
-            width: 100%;
-            height: 45px;
-            background-color: transparent;
-            border: none;
-            color: $PrimaryColor;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-            svg {
-               stroke-width: 1.5px;
-            }
-            &:hover {
-               border: 2px solid $PrimaryColor;
-               color: $PrimaryColor;
-               svg {
-                  stroke: $PrimaryColor;
-               }
-            }
-            span {
-               font-family: $ParentFont;
-               font-size: 16px;
-            }
-         }
-      }
-   }
+    }
+  }
+  .chapter {
+    width: 100%;
+    padding: 0 50px;
+  }
 }

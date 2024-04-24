@@ -1,42 +1,77 @@
 @import "../../sass/variables.module";
 
 .container {
-   width: 100%;
-   height: 100px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   border-bottom: 1px solid #ccc;
-   padding: 0 20px;
-   h2 {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  .web {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+    h2 {
       font-family: $ParentFont;
-      font-weight: $PFWeigth;
-   }
-   .auth {
+      font-weight: 500;
+      font-size: 22px;
+    }
+    .auth {
       display: flex;
       gap: 10px;
       a {
-         padding: 13px 30px;
-         border-radius: 3px;
-         border: none;
-         cursor: pointer;
-         text-decoration: none;
-         span {
-            font-weight: 600;
-            font-size: 1rem;
-         }
-         &:nth-child(1) {
-            background-color: #eee;
-            color: #000;
-            &:hover {
-               background-color: $PrimaryColor;
-               color: #fff;
-            }
-         }
-         &:nth-child(2) {
+        padding: 13px 30px;
+        border-radius: 3px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        span {
+          font-weight: 600;
+          font-size: 1rem;
+        }
+        &:nth-child(1) {
+          background-color: #eee;
+          color: #000;
+          &:hover {
             background-color: $PrimaryColor;
             color: #fff;
-         }
+          }
+        }
+        &:nth-child(2) {
+          background-color: $PrimaryColor;
+          color: #fff;
+        }
       }
-   }
+    }
+  }
+  .mobile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    @media screen and (min-width: 900px) {
+      display: none;
+    }
+    button {
+      border-radius: 100px;
+      width: 45px;
+      height: 45px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        background-color: $PrimaryColor;
+        svg {
+          stroke: #fff;
+        }
+      }
+    }
+  }
 }

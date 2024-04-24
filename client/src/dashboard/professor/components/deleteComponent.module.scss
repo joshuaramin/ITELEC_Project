@@ -1,0 +1,37 @@
+@import "../../../sass/variables.module";
+
+.container {
+  width: 500px;
+  height: 230px;
+  box-shadow: 0px 0px 3px 0px #ccc;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
+  h2 {
+    font-family: $ParentFont;
+    font-weight: 500;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .btnGrpContainer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .cancelBtn {
+        width: 100%;
+        height: 45px;
+        border: none;
+        border-radius: 5px;
+        font-family: $ParentFont;
+      }
+    }
+  }
+}

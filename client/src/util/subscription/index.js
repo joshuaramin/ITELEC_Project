@@ -26,3 +26,13 @@ export const NewlySubjectLesson = gql`
       }
    }
 `;
+
+
+export const NewlyChapterLesson = gql`subscription NewlyLessonChapterSubscription($lessonId: ID!) {
+   NewlyLessonChapterSubscription(lessonID: $lessonId) {
+     chapterID
+     content
+     chapter
+     createdAt
+   }
+ }`

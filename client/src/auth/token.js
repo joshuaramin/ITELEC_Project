@@ -1,9 +1,21 @@
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
-export default function Token() {
-   const token = Cookies.get("access_token");
 
-   const decodedToken = jwtDecode(token);
+function Token() {
+  const [token, setToken] = useState("");
 
-   return decodedToken.userID;
+  useEffect(() => {
+    const cookies = Cookies.get("access_token");
+
+    if (cookies) {
+      const decoded = jwtDecode(cookies);
+      setToken(decoded.userID);
+    }
+  }, [token]);
+
+  return token;
 }
+
+// Export the decoded token along with the component
+export const DecodedToken = Token;

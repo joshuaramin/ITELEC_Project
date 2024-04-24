@@ -1,0 +1,68 @@
+@import "../../../../../../sass/variables.module";
+
+.chapterCard {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-radius: 5px;
+  .lessonHover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    position: absolute;
+    inset: 0;
+  }
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    svg {
+      stroke-width: 1.5px;
+    }
+    span {
+      cursor: pointer;
+    }
+  }
+  .btnGrp {
+    display: flex;
+    gap: 5px;
+  }
+
+  .editBtn,
+  .trashBtn {
+    display: none;
+  }
+  &:hover {
+    background-color: #f5f5f5;
+    .info {
+      text-decoration: underline $PrimaryColor;
+      svg {
+        stroke: $PrimaryColor;
+      }
+      span {
+        color: $PrimaryColor;
+      }
+    }
+    .editBtn,
+    .trashBtn {
+      background-color: #f5f5f5;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+      border: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      svg {
+        stroke-width: 1.5px;
+      }
+    }
+  }
+}

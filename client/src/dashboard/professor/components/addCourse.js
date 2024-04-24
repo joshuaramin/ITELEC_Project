@@ -1,150 +1,147 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./addCourse.module.scss";
-import { TbTrash, TbX } from "react-icons/tb";
+import { TbTrash } from "react-icons/tb";
 import { GetAllCategory } from "../../../util/Query/category";
 import { useMutation, useQuery } from "@apollo/client";
 import { AddNewSubject } from "../../../util/Mutation/course";
-import Token from "../../../auth/token";
-import Message from "../../../components/message/message";
+import { DecodedToken } from "../../../auth/token";
+import FormHeader from "../../../components/form/formHeader";
+import ButtonForm from "../../../components/form/button";
+import InputForm from "../../../components/form/input";
+import TextareaForm from "../../../components/form/textarea";
 
 export default function AddCourse({ onChange }) {
-   const [courseBgImage, setCourseBgImage] = useState(null);
-   const [preview, setPreview] = useState(null);
+  const [courseBgImage, setCourseBgImage] = useState(null);
+  const [preview, setPreview] = useState(null);
 
-   const [course, setCourse] = useState({
-      name: "",
-      langauge: "",
-      category: "",
-      description: "",
-   });
+  const token = DecodedToken();
 
-   const fileRef = useRef(null);
+  const [course, setCourse] = useState({
+    name: "",
+    langauge: "",
+    category: "",
+    description: "",
+  });
 
-   const onClickFileUpload = () => {
-      fileRef.current?.click();
-   };
+  const fileRef = useRef(null);
 
-   const onFileChange = (e) => {
-      const file = e.target.files[0];
+  const onClickFileUpload = () => {
+    fileRef.current?.click();
+  };
 
-      if (!file) alert("file is required");
+  const onFileChange = (e) => {
+    const file = e.target.files[0];
 
-      const reader = new FileReader();
+    if (!file) alert("file is required");
 
-      const url = reader.readAsDataURL(file);
-      reader.onload = () => {
-         setPreview(reader.result);
-      };
+    const reader = new FileReader();
 
-      setCourseBgImage(file);
-   };
+    const url = reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreview(reader.result);
+    };
 
-   const { data } = useQuery(GetAllCategory);
+    setCourseBgImage(file);
+  };
 
-   const [AddNewCourse, { data: subjectData, error: subjectError }] =
-      useMutation(AddNewSubject);
+  const { data } = useQuery(GetAllCategory);
 
-   const onHandleSubject = (e) => {
-      e.preventDefault();
-      AddNewCourse({
-         variables: {
-            categoryId: course.category,
-            input: {
-               subject: course.name,
-               description: course.description,
-               language: course.langauge,
-            },
-            userId: Token(),
+  const [AddNewCourse] = useMutation(AddNewSubject);
 
-            file: courseBgImage,
-         },
+  const onHandleNameChange = (e) => {
+    setCourse({ ...course, name: e.target.value });
+  };
 
-         onCompleted: () => {
-            onChange();
-         },
+  const onHandleLanguageChange = (e) => {
+    setCourse({ ...course, langauge: e.target.value });
+  };
 
-         errorPolicy: "all",
-      });
-   };
-   return (
-      <div className={styles.container}>
-         <div className={styles.header}>
-            <button onClick={onChange}>
-               <TbX size={23} />
-            </button>
-         </div>
-         <div className={styles.body}>
-            <form onSubmit={onHandleSubject}>
-               <div className={styles.fileuploadContainer}>
-                  <div
-                     onClick={onClickFileUpload}
-                     className={styles.fileupload}
-                  >
-                     {courseBgImage ? (
-                        <img src={preview} alt='' height={100} width={300} />
-                     ) : (
-                        <h2>Click or Drag and Drop</h2>
-                     )}
-                  </div>
-                  {courseBgImage ? (
-                     <div>
-                        <button
-                           type='button'
-                           onClick={() => setCourseBgImage(null)}
-                        >
-                           <TbTrash size={23} />
-                        </button>
-                     </div>
-                  ) : null}
-               </div>
-               <input
-                  type='file'
-                  ref={fileRef}
-                  accept='image/*'
-                  hidden
-                  name='file'
-                  onChange={onFileChange}
-               />
-               <input
-                  type='text'
-                  placeholder='Name'
-                  value={course.name}
-                  onChange={(e) =>
-                     setCourse({ ...course, name: e.target.value })
-                  }
-               />
-               <input
-                  type='text'
-                  placeholder='Language'
-                  value={course.langauge}
-                  onChange={(e) =>
-                     setCourse({ ...course, langauge: e.target.value })
-                  }
-               />
-               <select
-                  onChange={(e) =>
-                     setCourse({ ...course, category: e.target.value })
-                  }
-               >
-                  <option>-</option>
-                  {data?.getAllCategory.map(({ category, categoryID }) => (
-                     <option value={categoryID} key={categoryID}>
-                        {category}
-                     </option>
-                  ))}
-               </select>
-               <textarea
-                  placeholder='Description'
-                  value={course.description}
-                  onChange={(e) =>
-                     setCourse({ ...course, description: e.target.value })
-                  }
-               />
-               <button className={styles.submit} type='submit'>
-                  Submit
-               </button>
-            </form>
-         </div>
+  const onHandleDescriptionChange = (e) => {
+    setCourse({ ...course, description: e.target.value });
+  };
+
+  const onHandleSubject = (e) => {
+    e.preventDefault();
+    AddNewCourse({
+      variables: {
+        categoryId: course.category,
+        input: {
+          subject: course.name,
+          description: course.description,
+          language: course.langauge,
+        },
+        userId: token,
+        file: courseBgImage,
+      },
+
+      onCompleted: () => {
+        onChange();
+      },
+
+      errorPolicy: "all",
+    });
+  };
+  return (
+    <div className={styles.container}>
+      <FormHeader close={onChange} />
+      {DecodedToken}
+      <div className={styles.body}>
+        <form onSubmit={onHandleSubject}>
+          <h2>Add Course</h2>
+          <div className={styles.fileuploadContainer}>
+            <div onClick={onClickFileUpload} className={styles.fileupload}>
+              {courseBgImage ? (
+                <img src={preview} alt="" height={100} width={300} />
+              ) : (
+                <h2>Click or Drag and Drop</h2>
+              )}
+            </div>
+            {courseBgImage ? (
+              <div>
+                <button type="button" onClick={() => setCourseBgImage(null)}>
+                  <TbTrash size={23} />
+                </button>
+              </div>
+            ) : null}
+          </div>
+          <input
+            type="file"
+            ref={fileRef}
+            accept="image/*"
+            hidden
+            name="file"
+            onChange={onFileChange}
+          />
+          <InputForm
+            type={"text"}
+            placeHolder={"Course Name"}
+            value={course.name}
+            onChange={onHandleNameChange}
+          />
+          <InputForm
+            type={"text"}
+            placeHolder={"Course Language"}
+            value={course.langauge}
+            onChange={onHandleLanguageChange}
+          />
+          <select
+            onChange={(e) => setCourse({ ...course, category: e.target.value })}
+          >
+            <option>-</option>
+            {data?.getAllCategory.map(({ category, categoryID }) => (
+              <option value={categoryID} key={categoryID}>
+                {category}
+              </option>
+            ))}
+          </select>
+          <TextareaForm
+            onChange={onHandleDescriptionChange}
+            value={course.description}
+            placeholder={"Course Description"}
+          />
+          <ButtonForm name={"Submit"} />
+        </form>
       </div>
-   );
+    </div>
+  );
 }

@@ -1,0 +1,17 @@
+.container {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    button {
+       width: 45px;
+       height: 45px;
+       border-radius: 100px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       border: none;
+       outline: none;
+       cursor: pointer;
+    }
+ }
