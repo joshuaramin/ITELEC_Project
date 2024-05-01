@@ -28,3 +28,19 @@ export const DeleteSubject = gql`
     }
   }
 `;
+
+export const UpdateSubjectTitle = gql`
+  mutation UpdateSubjectTitle($subject: String!, $subjectId: ID!) {
+    updateSubjectTitle(subject: $subject, subjectID: $subjectId) {
+      subjectID
+    }
+  }
+`;
+
+export const UpdateDescription = gql`
+  mutation UpdateSubjectDescription($subjectId: ID!, $description: String!) {
+    updateSubjectDescription(subjectID: $subjectId, description: $description) {
+      subjectID
+    }
+  }
+`;

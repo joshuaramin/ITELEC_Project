@@ -9,6 +9,7 @@
   .web {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     padding: 0 20px;
     @media screen and (max-width: 900px) {
@@ -17,7 +18,7 @@
     h2 {
       font-family: $ParentFont;
       font-weight: 500;
-      font-size: 22px;
+      font-size: 20px;
     }
     .auth {
       display: flex;

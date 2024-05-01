@@ -1,0 +1,32 @@
+@import "../../../../../sass/variables.module";
+.lesson {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    font-family: $ParentFont;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  button {
+    width: 120px;
+    height: 40px;
+    background-color: $PrimaryColor;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    svg {
+      stroke: #fff;
+    }
+    span {
+      color: #fff;
+      font-family: $ChildFont;
+      font-weight: 600;
+    }
+  }
+}

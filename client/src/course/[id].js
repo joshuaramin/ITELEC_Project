@@ -21,7 +21,7 @@ export default function CourseID() {
       <div className={styles.main}>
         <div className={styles.header}>
           <h2>{data?.getSubjectById.subject}</h2>
-          <p>Creaded by: {data?.getSubjectById.user.profile.fullname}</p>
+          <p>Created by: {data?.getSubjectById.user.profile.fullname}</p>
           <p>
             Last Update:{" "}
             {format(
@@ -31,7 +31,13 @@ export default function CourseID() {
           </p>
         </div>
         <div className={styles.enrollContainer}>
-          <View image={data?.getSubjectById.image} />
+          <View
+            id={params.id}
+            image={data?.getSubjectById.image}
+            count={data?.getSubjectById.lessonCount}
+            language={data?.getSubjectById.language}
+            title={data?.getSubjectById.subject}
+          />
         </div>
       </div>
       <div className={styles.content}>
@@ -43,13 +49,14 @@ export default function CourseID() {
           <h2>Course Content</h2>
           <div className={styles.courseContainer}>
             {data?.getSubjectById.lessons.map(
-              ({ lessonID, lesson, chapter }) => (
+              ({ lessonID, lesson, chapter, lessonCount }) => (
                 <Card
                   subjectID={data?.getSubjectById.subjectID}
                   key={lessonID}
                   chapter={chapter}
                   lesson={lesson}
                   lessonID={lessonID}
+                  id={params.id}
                 />
               )
             )}

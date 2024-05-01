@@ -26,15 +26,9 @@ export default function Card({
         <span>Language: {language}</span>
         <span>Topics</span>
         <div className={styles.topicContainer}>
-          {lessons.slice(0, 7).map(({ lesson, lessonID }) => (
+          {lessons.slice(0, 5).map(({ lesson, lessonID }) => (
             <div key={lessonID}>
-              <li
-                onClick={() =>
-                  router(`/dashboard/professor/course/${id}/lesson/${lessonID}`)
-                }
-              >
-                {lesson}
-              </li>
+              <li>{lesson}</li>
             </div>
           ))}
         </div>

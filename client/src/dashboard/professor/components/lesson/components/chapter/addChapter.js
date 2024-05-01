@@ -6,6 +6,7 @@ import RichTextEditor from "../richtextedit";
 import FormHeader from "../../../../../../components/form/formHeader";
 import ButtonForm from "../../../../../../components/form/button";
 import InputForm from "../../../../../../components/form/input";
+import Message from '../../../../../../components/message/message'
 
 export default function AddChapter({ id, close }) {
   const [title, setTitle] = useState("");
@@ -15,7 +16,7 @@ export default function AddChapter({ id, close }) {
   };
   const [description, setDescription] = useState("");
 
-  const [NewChapter] = useMutation(CreateChapterLesson);
+  const [NewChapter, { error }] = useMutation(CreateChapterLesson);
 
   const onHandleSubmitForm = (e) => {
     e.preventDefault();
@@ -36,6 +37,7 @@ export default function AddChapter({ id, close }) {
   return (
     <div className={styles.container}>
       <FormHeader close={close} />
+      {error ? <Message message={error.message} error={error } /> : null}
       <form onSubmit={onHandleSubmitForm}>
         <InputForm
           value={title}

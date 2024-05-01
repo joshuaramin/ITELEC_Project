@@ -5,14 +5,17 @@ import { useQuery } from "@apollo/client";
 import { GetSubjectByID } from "../../../util/Query/subject";
 import { GetSubjectLessonBySubjectID } from "../../../util/Query/lesson";
 import { NewlySubjectLesson } from "../../../util/subscription/index";
-import { TbEdit, TbPlus } from "react-icons/tb";
 import LessonCard from "../components/lesson/lesson.card";
-import Addlesson from "./components/addLesson";
+import Addlesson from "./components/Add/addLesson";
+import Header from "./components/header/header";
+import Title from "./components/title/title";
+import Description from "./components/description/description";
+import Lesson from "./components/lesson/lesson";
+
 export default function CourseID() {
   const params = useParams();
 
   const [toggleLesson, setTogglesson] = useState(false);
-
   const onHandleTogglesson = () => {
     setTogglesson(() => !toggleLesson);
   };
@@ -52,6 +55,8 @@ export default function CourseID() {
     });
   }, [params.id, subscribeToMore]);
 
+  if (loading) return <p>Loading...</p>;
+
   return (
     <div className={styles.container}>
       {toggleLesson ? (
@@ -59,50 +64,15 @@ export default function CourseID() {
           <Addlesson close={onHandleTogglesson} />
         </div>
       ) : null}
-      <div className={styles.header}>
-        <div className={styles.bgCourseImage}>
-          <img
-            src={data?.getSubjectById.image}
-            alt=""
-            style={{
-              width: "100%",
-              objectFit: "cover",
-              imageResolution: "inherit",
-            }}
-          />
-        </div>
-      </div>
+      <Header image={data?.getSubjectById.image} />
       <div className={styles.body}>
-        <div className={styles.titleContainer}>
-          <div>
-            <h2>{data?.getSubjectById.subject}</h2>
-          </div>
-          <div>
-            <button>
-              <TbEdit size={25} />
-            </button>
-          </div>
-        </div>
+        <Title title={data?.getSubjectById.subject} />
         <div className={styles.language}>
           <span>Language: {data?.getSubjectById.language}</span>
         </div>
-        <div className={styles.descriptionContainer}>
-          <div>
-            <h2>Description</h2>
-            <button>
-              <TbEdit size={23} />
-            </button>
-          </div>
-          <span>{data?.getSubjectById.description}</span>
-        </div>
+        <Description description={data?.getSubjectById.description} />
         <div className={styles.lessonContainer}>
-          <div className={styles.lesson}>
-            <h2>Lessons</h2>
-            <button onClick={onHandleTogglesson}>
-              <TbPlus size={20} />
-              <span>Add Lesson</span>
-            </button>
-          </div>
+          <Lesson onHandleTogglesson={onHandleTogglesson} />
 
           {LessonData?.getAllSubjectLesson.map(
             ({ lessonID, lesson, chapter }) => (

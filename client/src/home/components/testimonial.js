@@ -97,6 +97,7 @@ export default function Testimonial() {
         </button>
         {paginatedTestimonials.map(({ name }, i) => (
           <button
+            key={i}
             style={
               currentPage === i + 1
                 ? { background: "#6f2da8", color: "#fff" }

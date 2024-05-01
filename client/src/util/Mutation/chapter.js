@@ -19,6 +19,22 @@ export const CreateChapterLesson = gql`
   }
 `;
 
+export const UpdateChapterLesson = gql`
+  mutation UpdateLessonChapter(
+    $chapter: String!
+    $content: String!
+    $chapterId: ID!
+  ) {
+    updateLessonChapter(
+      chapter: $chapter
+      content: $content
+      chapterID: $chapterId
+    ) {
+      chapterID
+    }
+  }
+`;
+
 export const DeleteChapterLesson = gql`
   mutation DeleteLessonChapter($chapterId: ID!) {
     deleteLessonChapter(chapterID: $chapterId) {

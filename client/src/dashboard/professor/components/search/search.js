@@ -36,6 +36,7 @@ export default function Search() {
                   router(`/dashboard/professor/course/${subjectID}`)
                 }
                 className={styles.searchCard}
+                key={subjectID}
               >
                 <div>
                   <img src={image} alt="" height={65} width={200} />

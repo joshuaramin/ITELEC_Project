@@ -1,0 +1,43 @@
+@import "../../../../../sass/variables.module";
+
+.titleContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  .title {
+    width: 100%;
+  }
+  &:hover {
+    div {
+      .editBtn {
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        svg {
+          stroke-width: 1.5px;
+        }
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+    }
+  }
+  div {
+    h2 {
+      font-size: 1.75rem;
+      font-family: $ParentFont;
+      font-weight: 500;
+    }
+    .editBtn {
+      display: none;
+    }
+  }
+}

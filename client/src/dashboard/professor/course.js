@@ -13,7 +13,6 @@ export default function Course() {
   const [toggle, setToggle] = useState(false);
 
   const token = DecodedToken();
-  console.log(token);
   const { data, loading, error, subscribeToMore } = useQuery(
     GetMySubjectCreated,
     {

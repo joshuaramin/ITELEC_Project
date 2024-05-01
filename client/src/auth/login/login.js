@@ -39,7 +39,7 @@ export default function Login() {
         const getCookies = Cookies.get("access_token");
 
         const decodeToken = jwtDecode(getCookies);
-        router(`/dashboard/${decodeToken.role}/overview`);
+        router(`/dashboard/${decodeToken.role}/course`);
         window.location.reload();
       },
       fetchPolicy: "network-only",

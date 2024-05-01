@@ -1,4 +1,22 @@
 .container {
-   width: 100%;
-   height: 100vh;
+  width: 100%;
+  height: 100vh;
+
+  .course {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .body {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      h2 {
+        font-size: 35px;
+      }
+    }
+  }
 }

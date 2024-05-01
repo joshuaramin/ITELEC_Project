@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import styles from "./lesson.module.scss";
 import { TbChevronDown, TbChevronUp } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
 import AddChapter from "./components/chapter/addChapter";
 import { GetAllChapterBylessonID } from "../../../../util/Query/chapter";
 import { NewlyChapterLesson } from "../../../../util/subscription/index";
-
-import { useQuery } from "@apollo/client";
+import { DeleteSubjectLesson } from "../../../../util/Mutation/lesson";
+import { useMutation, useQuery } from "@apollo/client";
 import EditLesson from "./components/editLesson";
 import DeleteComponent from "../deleteComponent";
 import GroupBtn from "./components/groupBtn";
 import ChapterCard from "./components/chapter/chapter.card";
 
 export default function LessonCard({ id, courseID, lesson }) {
-  const router = useNavigate();
-
   const [onToggle, setOnToggle] = useState(false);
   const [addChapter, setAddChapter] = useState(false);
   const [editLesson, setEditLesson] = useState(false);
   const [deleteLesson, setDeleteLesson] = useState(false);
 
+  const [mutate] = useMutation(DeleteSubjectLesson);
   const { data, loading, error, subscribeToMore } = useQuery(
     GetAllChapterBylessonID,
     {
@@ -71,7 +69,15 @@ export default function LessonCard({ id, courseID, lesson }) {
 
   const onHandleSubmitForm = (e) => {
     e.preventDefault();
-    
+    mutate({
+      variables: {
+        lessonId: id,
+      },
+      onCompleted: () => {
+        window.location.reload();
+      },
+      errorPolicy: "all",
+    });
   };
 
   return (
@@ -90,7 +96,6 @@ export default function LessonCard({ id, courseID, lesson }) {
       {deleteLesson ? (
         <div className={styles.lessonHover}>
           <DeleteComponent
-            id={id}
             close={onHandleDeleteLesson}
             onHandleSubmitForm={onHandleSubmitForm}
           />
@@ -101,13 +106,7 @@ export default function LessonCard({ id, courseID, lesson }) {
           <button onClick={onHandleToggle}>
             {onToggle ? <TbChevronUp size={23} /> : <TbChevronDown size={23} />}
           </button>
-          <h3
-            onClick={() =>
-              router(`/dashboard/professor/course/${courseID}/lesson/${id}/`)
-            }
-          >
-            {lesson}
-          </h3>
+          <h3>{lesson}</h3>
         </div>
         <GroupBtn
           styles={styles}
@@ -118,14 +117,18 @@ export default function LessonCard({ id, courseID, lesson }) {
       </div>
       {onToggle ? (
         <div className={styles.chapter}>
-          {data?.getAllChapterByLessonID.map(({ chapterID, chapter }) => (
-            <ChapterCard
-              key={chapterID}
-              chapter={chapter}
-              courseID={courseID}
-              id={id}
-            />
-          ))}
+          {data?.getAllChapterByLessonID.map(
+            ({ chapterID, chapter, content }) => (
+              <ChapterCard
+                key={chapterID}
+                chapterID={chapterID}
+                chapter={chapter}
+                content={content}
+                courseID={courseID}
+                id={id}
+              />
+            )
+          )}
         </div>
       ) : null}
     </div>

@@ -1,10 +1,10 @@
-import React from 'react'
-import styles from './button.module.scss'
+import React from "react";
+import styles from "./button.module.scss";
 
-export default function ButtonForm({ name}) {
+export default function ButtonForm({ name }) {
   return (
-     <button type='submit' className={styles.container}>
-            <span>{name}</span>
+    <button type="submit" className={styles.container}>
+      <span>{name}</span>
     </button>
-  )
+  );
 }

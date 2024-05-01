@@ -7,17 +7,18 @@ import CourseID from "./course/[id]";
 import ForgotPassword from "./auth/forgotpassword/forgotpassword";
 import Chapter from "./course/chapter/[chapterID]";
 import ProtectedRoute from "./auth/authentication";
-import Professor from "./dashboard/professor/professor";
 import ProfessorCourse from "./dashboard/professor/course";
 import ProfessorCourseID from "./dashboard/professor/course/[id]";
-import CourseTopicID from "./dashboard/professor/course/topic/[topicID]";
-import TopicContentID from "./dashboard/professor/course/topic/content/[contentID]";
 import Student from "./dashboard/student/student";
 
-import ProfessorLayout from "./layout/professor.layout";
 import MainLayout from "./layout/main.layout";
 import Verification from "./auth/verification/verification";
 import ResetPassword from "./auth/resetpassword/resetpassword";
+
+// Dashboard Layout
+
+import ProfessorLayout from "./layout/professor.layout";
+import StudentLayout from "./layout/student.layout";
 
 function App() {
   return (
@@ -39,12 +40,10 @@ function App() {
 
       <Routes>
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard/student" element={<Student />} />
+          <Route element={<StudentLayout />}>
+            <Route path="/dashboard/student/course" element={<Student />} />
+          </Route>
           <Route element={<ProfessorLayout />}>
-            <Route
-              path="/dashboard/professor/overview"
-              element={<Professor />}
-            />
             <Route
               path="/dashboard/professor/course"
               element={<ProfessorCourse />}
@@ -52,14 +51,6 @@ function App() {
             <Route
               path="/dashboard/professor/course/:id"
               element={<ProfessorCourseID />}
-            />
-            <Route
-              path="/dashboard/professor/course/:id/lesson/:topicID"
-              element={<CourseTopicID />}
-            />
-            <Route
-              path="/dashboard/professor/course/:id/lesson/:topicID/content/:contentID"
-              element={<TopicContentID />}
             />
           </Route>
         </Route>
