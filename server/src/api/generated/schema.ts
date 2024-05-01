@@ -177,6 +177,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['token'] | null; // token
     resetUserPassword: NexusGenRootTypes['user'] | null; // user
     updateLessonChapter: NexusGenRootTypes['chapter'] | null; // chapter
+    updateSubjectDescription: NexusGenRootTypes['subject'] | null; // subject
     updateSubjectLessonTitle: NexusGenRootTypes['lesson'] | null; // lesson
     updateSubjectTitle: NexusGenRootTypes['subject'] | null; // subject
     updateUserProfile: NexusGenRootTypes['profile'] | null; // profile
@@ -185,9 +186,11 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllCategory: Array<NexusGenRootTypes['category'] | null> | null; // [category]
     getAllChapterByLessonID: Array<NexusGenRootTypes['chapter'] | null> | null; // [chapter]
+    getAllMyEnrolledSubject: Array<NexusGenRootTypes['enroll'] | null> | null; // [enroll]
     getAllSubject: Array<NexusGenRootTypes['subject'] | null> | null; // [subject]
     getAllSubjectLesson: Array<NexusGenRootTypes['lesson'] | null> | null; // [lesson]
     getAllUserByRole: Array<NexusGenRootTypes['user'] | null> | null; // [user]
+    getEnrolledSubjectByIDs: boolean | null; // Boolean
     getEnrollendById: NexusGenRootTypes['enroll'] | null; // enroll
     getLessonChapter: NexusGenRootTypes['chapter'] | null; // chapter
     getMySubjectCreated: Array<NexusGenRootTypes['subject'] | null> | null; // [subject]
@@ -289,6 +292,7 @@ export interface NexusGenFieldTypeNames {
     login: 'token'
     resetUserPassword: 'user'
     updateLessonChapter: 'chapter'
+    updateSubjectDescription: 'subject'
     updateSubjectLessonTitle: 'lesson'
     updateSubjectTitle: 'subject'
     updateUserProfile: 'profile'
@@ -297,9 +301,11 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getAllCategory: 'category'
     getAllChapterByLessonID: 'chapter'
+    getAllMyEnrolledSubject: 'enroll'
     getAllSubject: 'subject'
     getAllSubjectLesson: 'lesson'
     getAllUserByRole: 'user'
+    getEnrolledSubjectByIDs: 'Boolean'
     getEnrollendById: 'enroll'
     getLessonChapter: 'chapter'
     getMySubjectCreated: 'subject'
@@ -446,6 +452,10 @@ export interface NexusGenArgTypes {
       chapterID: string; // ID!
       content: string; // String!
     }
+    updateSubjectDescription: { // args
+      description: string; // String!
+      subjectID: string; // ID!
+    }
     updateSubjectLessonTitle: { // args
       lesson: string; // String!
       lessonID: string; // ID!
@@ -465,6 +475,10 @@ export interface NexusGenArgTypes {
     getAllChapterByLessonID: { // args
       lessonID: string; // ID!
     }
+    getAllMyEnrolledSubject: { // args
+      orderBys: string; // String!
+      userID: string; // ID!
+    }
     getAllSubject: { // args
       skip: number; // Int!
       take: number; // Int!
@@ -476,6 +490,10 @@ export interface NexusGenArgTypes {
       role?: NexusGenEnums['userRoles'] | null; // userRoles
       skip: number; // Int!
       take: number; // Int!
+    }
+    getEnrolledSubjectByIDs: { // args
+      subjectID: string; // ID!
+      userID: string; // ID!
     }
     getEnrollendById: { // args
       enrollID: string; // ID!

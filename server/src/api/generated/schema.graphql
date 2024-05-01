@@ -29,6 +29,7 @@ type Mutation {
   login(password: String!, username: String!): token
   resetUserPassword(password: String!, retype: String!, userID: ID!): user
   updateLessonChapter(chapter: String!, chapterID: ID!, content: String!): chapter
+  updateSubjectDescription(description: String!, subjectID: ID!): subject
   updateSubjectLessonTitle(lesson: String!, lessonID: ID!): lesson
   updateSubjectTitle(subject: String!, subjectID: ID!): subject
   updateUserProfile(input: profileInput): profile
@@ -43,9 +44,11 @@ scalar PhoneNumber
 type Query {
   getAllCategory: [category]
   getAllChapterByLessonID(lessonID: ID!): [chapter]
+  getAllMyEnrolledSubject(orderBys: String!, userID: ID!): [enroll]
   getAllSubject(skip: Int!, take: Int!): [subject]
   getAllSubjectLesson(subjectID: ID!): [lesson]
   getAllUserByRole(role: userRoles, skip: Int!, take: Int!): [user]
+  getEnrolledSubjectByIDs(subjectID: ID!, userID: ID!): Boolean
   getEnrollendById(enrollID: ID!): enroll
   getLessonChapter(chapterID: ID!): chapter
   getMySubjectCreated(userID: ID!): [subject]
