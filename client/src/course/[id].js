@@ -37,6 +37,7 @@ export default function CourseID() {
             count={data?.getSubjectById.lessonCount}
             language={data?.getSubjectById.language}
             title={data?.getSubjectById.subject}
+            student={data?.getSubjectById.enrolledUsers}
           />
         </div>
       </div>

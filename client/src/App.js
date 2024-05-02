@@ -16,7 +16,7 @@ import Verification from "./auth/verification/verification";
 import ResetPassword from "./auth/resetpassword/resetpassword";
 
 // Dashboard Layout
-
+import Settings from "./components/settings/settings";
 import ProfessorLayout from "./layout/professor.layout";
 import StudentLayout from "./layout/student.layout";
 
@@ -42,8 +42,13 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<StudentLayout />}>
             <Route path="/dashboard/student/course" element={<Student />} />
+            <Route path="/dashboard/student/settings" element={<Settings />} />
           </Route>
           <Route element={<ProfessorLayout />}>
+            <Route
+              path="/dashboard/professor/settings"
+              element={<Settings />}
+            />
             <Route
               path="/dashboard/professor/course"
               element={<ProfessorCourse />}

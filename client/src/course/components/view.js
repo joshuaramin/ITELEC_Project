@@ -8,7 +8,7 @@ import { DecodedToken } from "../../auth/token";
 import CourseChecker from "../courseChecker";
 import Message from "../../components/message/message";
 
-export default function View({ image, count, language, id, title }) {
+export default function View({ image, count, language, id, title, student }) {
   const token = DecodedToken();
 
   const [message, setMessage] = useState(false);
@@ -61,7 +61,7 @@ export default function View({ image, count, language, id, title }) {
       <div className={styles.information}>
         <div>
           <TbUsers size={20} />{" "}
-          <span>{Intl.NumberFormat("en-US").format(1200)} Students</span>
+          <span>{Intl.NumberFormat("en-US").format(student)} Students</span>
         </div>
         <div>
           <TbBook size={20} />
