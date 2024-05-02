@@ -248,6 +248,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     description: string | null; // String
     enrolled: Array<NexusGenRootTypes['enroll'] | null> | null; // [enroll]
+    enrolledUsers: number | null; // Int
     image: string | null; // String
     language: string | null; // String
     lessonCount: number | null; // Int
@@ -363,6 +364,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     description: 'String'
     enrolled: 'enroll'
+    enrolledUsers: 'Int'
     image: 'String'
     language: 'String'
     lessonCount: 'Int'

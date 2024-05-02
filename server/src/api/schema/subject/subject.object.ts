@@ -23,7 +23,17 @@ export const SubjectObject = objectType({
                 })
             }
         })
-
+        t.int("enrolledUsers", {
+            resolve: async({ subjectID}): Promise<any> => {
+                return await prisma.enroll.count({
+                    where: {
+                        Subject: {
+                            subjectID
+                        }
+                    }
+                })
+            }
+        })
         t.list.field("lessons", {
             type: "lesson",
             resolve: async ({ subjectID }): Promise<any> => {

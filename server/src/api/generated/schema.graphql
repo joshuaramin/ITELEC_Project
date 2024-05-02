@@ -123,6 +123,7 @@ type subject {
   createdAt: DateTime
   description: String
   enrolled: [enroll]
+  enrolledUsers: Int
   image: String
   language: String
   lessonCount: Int
