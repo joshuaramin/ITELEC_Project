@@ -234,6 +234,26 @@ export const UserMutation = extendType({
       },
     });
 
+    t.field("updateUserUsername", {
+      type: "user",
+      args: { userID: nonNull(idArg()), username: nonNull(stringArg()) },
+      resolve: async (_, { userID, username }): Promise<any> => {
+        if (!username) throw new GraphQLError("Username is required");
+
+        const users = await prisma.user.findUnique({
+          where: { username },
+        });
+
+        if (users)
+          throw new GraphQLError(`${username} is already exist. try new one`);
+
+        return await prisma.user.update({
+          where: { userID },
+          data: { username },
+        });
+      },
+    });
+
     t.field("deleteUserAccount", {
       type: "user",
       args: { userID: nonNull(idArg()) },
@@ -254,6 +274,8 @@ export const UserMutation = extendType({
         userID: nonNull(idArg()),
       },
       resolve: async (_, { userID, password, retype }): Promise<any> => {
+        if (!password) throw new GraphQLError("Password is required");
+        if (!retype) throw new GraphQLError("re-type Password is required");
         if (password !== retype)
           throw new GraphQLError("Password and Retype Password is not matched");
 

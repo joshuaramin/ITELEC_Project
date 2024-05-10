@@ -103,7 +103,7 @@ model Lesson {
 
 model Chapter {
   chapterID String        @id @default(cuid())
-  chapter   String
+  chapter   String  
   content   String
   status    ChapterStatus
   createdAt DateTime      @default(now()) @db.Timestamp()

@@ -33,6 +33,7 @@ type Mutation {
   updateSubjectLessonTitle(lesson: String!, lessonID: ID!): lesson
   updateSubjectTitle(subject: String!, subjectID: ID!): subject
   updateUserProfile(input: profileInput): profile
+  updateUserUsername(userID: ID!, username: String!): user
   updateVerfiedAccount(userID: ID!): user
 }
 

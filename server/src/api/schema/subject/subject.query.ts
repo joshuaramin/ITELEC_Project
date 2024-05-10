@@ -74,7 +74,7 @@ export const SubjectQuery = extendType({
           },
         });
 
-        if (!subject) throw new GraphQLError("Not Found");
+        if (subject.length < 0) throw new GraphQLError("No Subject");
 
         return subject;
       },

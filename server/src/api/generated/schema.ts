@@ -181,6 +181,7 @@ export interface NexusGenFieldTypes {
     updateSubjectLessonTitle: NexusGenRootTypes['lesson'] | null; // lesson
     updateSubjectTitle: NexusGenRootTypes['subject'] | null; // subject
     updateUserProfile: NexusGenRootTypes['profile'] | null; // profile
+    updateUserUsername: NexusGenRootTypes['user'] | null; // user
     updateVerfiedAccount: NexusGenRootTypes['user'] | null; // user
   }
   Query: { // field return type
@@ -297,6 +298,7 @@ export interface NexusGenFieldTypeNames {
     updateSubjectLessonTitle: 'lesson'
     updateSubjectTitle: 'subject'
     updateUserProfile: 'profile'
+    updateUserUsername: 'user'
     updateVerfiedAccount: 'user'
   }
   Query: { // field return type name
@@ -468,6 +470,10 @@ export interface NexusGenArgTypes {
     }
     updateUserProfile: { // args
       input?: NexusGenInputs['profileInput'] | null; // profileInput
+    }
+    updateUserUsername: { // args
+      userID: string; // ID!
+      username: string; // String!
     }
     updateVerfiedAccount: { // args
       userID: string; // ID!
