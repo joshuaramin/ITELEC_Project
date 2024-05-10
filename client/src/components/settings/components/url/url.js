@@ -3,16 +3,12 @@ import styles from "./url.module.scss";
 
 const urls = [
   {
-    name: "Account Details",
-    value: "details",
-  },
-  {
     name: "Change Password",
     value: "password",
   },
   {
-    name: "Change Email Address",
-    value: "email",
+    name: "Change Username",
+    value: "username",
   },
 ];
 

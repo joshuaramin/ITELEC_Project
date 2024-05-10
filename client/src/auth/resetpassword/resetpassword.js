@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import { RESETPASSWORD } from "../../util/Mutation/auth";
 import Message from "../../components/message/message";
 import { TbEye, TbEyeOff } from "react-icons/tb";
+import Form from "../../components/form/form";
 
 export default function ResetPassword() {
   const params = useParams();
@@ -51,7 +52,7 @@ export default function ResetPassword() {
   };
   return (
     <div className={styles.container}>
-      <form onSubmit={onHandleSubmit}>
+      <Form onSubmit={onHandleSubmit}>
         <h2>Reset Password</h2>
         {error ? <Message message={error.message} error={error} /> : null}
         {message === "" ? (
@@ -83,12 +84,12 @@ export default function ResetPassword() {
         ) : (
           <div className={styles.successPasswordUpdate}>
             <span>{message}</span>
-            <button onClick={() => route("/auth/login")}>
+            <button type="button" onClick={() => route("/auth/login")}>
               Go Back to Login
             </button>
           </div>
         )}
-      </form>
+      </Form>
     </div>
   );
 }

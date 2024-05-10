@@ -6,6 +6,7 @@ import { FindMyUniqueEmailAddress } from "../../util/Mutation/auth";
 import { gql, isApolloError, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import Message from "../../components/message/message";
+import Form from "../../components/form/form";
 
 export default function ForgotPassword() {
   const router = useNavigate();
@@ -48,7 +49,7 @@ export default function ForgotPassword() {
           </p>
         )}
       </div>
-      <form onSubmit={onHandleSubmitForm}>
+      <Form onSubmit={onHandleSubmitForm}>
         {error ? <Message message={error.message} error={error} /> : null}
         {message ? (
           <div className={styles.successL}>
@@ -79,7 +80,7 @@ export default function ForgotPassword() {
             </button>
           </>
         )}
-      </form>
+      </Form>
     </div>
   );
 }

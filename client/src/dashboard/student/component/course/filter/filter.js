@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TbChevronDown, TbChevronUp } from "react-icons/tb";
 import styles from "./filter.module.scss";
+import FilterCard from "./filterCard";
 
 const filData = [
   {
@@ -34,11 +35,13 @@ export default function Filter({
       {onValueToggle ? (
         <div className={styles.controller}>
           {filData.map(({ name, value }) => (
-            <div className={styles.controllerContainer}>
-              <button onClick={onHandleFilter} value={value}>
-                {name}
-              </button>
-            </div>
+            <FilterCard
+              key={name}
+              value={value}
+              name={name}
+              onHandleFilter={onHandleFilter}
+              styles={styles}
+            />
           ))}
         </div>
       ) : null}

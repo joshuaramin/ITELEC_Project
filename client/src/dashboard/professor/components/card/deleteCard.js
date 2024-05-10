@@ -8,6 +8,8 @@ import { DecodedToken } from "../../../../auth/token";
 export default function DeleteCard({ styles, id }) {
   const [toggle, setToggle] = useState(false);
 
+  const token = DecodedToken();
+
   const onCloseToggle = () => {
     setToggle(() => !toggle);
   };
@@ -20,14 +22,14 @@ export default function DeleteCard({ styles, id }) {
     const { getMySubjectCreated } = cache.readQuery({
       query: GetMySubjectCreated,
       variables: {
-        userId: DecodedToken,
+        userId: token,
       },
     });
 
     cache.writeQuery({
       query: GetMySubjectCreated,
       variables: {
-        userId: DecodedToken,
+        userId: token,
       },
       data: {
         getMySubjectCreated: getMySubjectCreated.filter((subj) => {

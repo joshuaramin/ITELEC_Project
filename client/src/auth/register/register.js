@@ -12,6 +12,7 @@ import Password from "../component/password";
 import { useMutation } from "@apollo/client";
 import { REGISTER } from "../../util/Mutation/auth";
 import { useNavigate } from "react-router-dom";
+import Form from "../../components/form/form";
 
 export default function Register() {
   const [role, setRole] = useState("");
@@ -94,7 +95,7 @@ export default function Register() {
   };
   return (
     <div className={styles.container}>
-      <form onSubmit={onHandleRegisterForm}>
+      <Form onSubmit={onHandleRegisterForm}>
         {error ? <Message message={error.message} /> : null}
         {message ? (
           <div className={styles.successPasswordUpdate}>
@@ -179,7 +180,7 @@ export default function Register() {
             </div>
           </>
         )}
-      </form>
+      </Form>
     </div>
   );
 }

@@ -127,7 +127,7 @@ export default function AddCourse({ onChange }) {
           <select
             onChange={(e) => setCourse({ ...course, category: e.target.value })}
           >
-            <option>-</option>
+            <option>Choose a Category</option>
             {data?.getAllCategory.map(({ category, categoryID }) => (
               <option value={categoryID} key={categoryID}>
                 {category}

@@ -52,3 +52,11 @@ export const RESETPASSWORD = gql`
     }
   }
 `;
+
+export const UPDATEUSERNAME = gql`
+  mutation UpdateUserUsername($userId: ID!, $username: String!) {
+    updateUserUsername(userID: $userId, username: $username) {
+      userID
+    }
+  }
+`;

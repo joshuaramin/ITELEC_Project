@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import InputForm from "../../components/form/input";
 import ButtonForm from "../../components/form/button";
+import Form from "../../components/form/form";
 
 export default function Login() {
   const router = useNavigate();
@@ -60,7 +61,7 @@ export default function Login() {
   }
   return (
     <div className={styles.container}>
-      <form onSubmit={onHandleSubmit}>
+      <Form onSubmit={onHandleSubmit}>
         <h2>School Academy</h2>
         {error ? <Message message={error.message} error={error} /> : null}
         <InputForm
@@ -84,7 +85,7 @@ export default function Login() {
             Don't have an account yet? <a href="/auth/register">Sign Up.</a>
           </span>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }
