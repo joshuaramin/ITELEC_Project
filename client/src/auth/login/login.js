@@ -62,7 +62,7 @@ export default function Login() {
   return (
     <div className={styles.container}>
       <Form onSubmit={onHandleSubmit}>
-        <h2>School Academy</h2>
+        <img src="/schoolacademylogo.png" alt="" height={200} width={180} />
         {error ? <Message message={error.message} error={error} /> : null}
         <InputForm
           type={"text"}

@@ -3,16 +3,22 @@ import styles from "./header.module.scss";
 import Cookies from "js-cookie";
 import Search from "./search/search";
 import Profile from "./profile/profile";
-import { TbSearch, TbUser } from "react-icons/tb";
-import InputForm from "../../components/form/input";
+import { TbMenu2, TbSearch, TbUser } from "react-icons/tb";
+import User from "./mobile/user";
 
 export default function Header() {
   const token = Cookies.get("access_token");
 
+  const [toggleUser, setToggleUser] = useState(false);
+
+  const onHandleToggleUser = () => {
+    setToggleUser(() => !toggleUser);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.web}>
-        <h2>School Academy</h2>
+        <img src="/schoolacademylogo.png" alt="" height={130} width={120} />
         <Search />
         {token ? (
           <Profile token={token} />
@@ -28,13 +34,11 @@ export default function Header() {
         )}
       </div>
       <div className={styles.mobile}>
-        <button>
-          <TbSearch size={25} />
-        </button>
         <h2>School Academy</h2>
-        <button>
-          <TbUser size={25} />
+        <button className={styles.navbtn} onClick={onHandleToggleUser}>
+          <TbMenu2 size={25} />
         </button>
+        {toggleUser ? <User close={onHandleToggleUser} /> : null}
       </div>
     </div>
   );
