@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import {
   TbChevronDown,
   TbDashboard,
+  TbLayoutDashboard,
   TbLogout,
   TbSettings,
 } from "react-icons/tb";
@@ -28,12 +29,12 @@ export default function Profile({ token }) {
     {
       name: "Dashboard",
       url: `/dashboard/${decodedToken.role}/course`,
-      icon: <TbSettings size={23} />,
+      icon: <TbLayoutDashboard size={23} />,
     },
     {
       name: "Settings",
       url: "/dashboard/settings",
-      icon: <TbDashboard size={23} />,
+      icon: <TbSettings size={23} />,
     },
   ];
 
